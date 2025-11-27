@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
- // استبدل بالمسار الصحيح
+import '../../feature/home/view/home_page.dart'; // ✅ استبدل بالمسار الصحيح
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,16 +8,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(412, 915), // ✅ حجم التصميم الأساسي
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
-         // home: const Homepage(),
+          title: 'task7',
           debugShowCheckedModeBanner: false,
-        
+          home: child, // ✅ استخدم child هنا
         );
       },
+      child: const HomePage(), // ✅ الصفحة الرئيسية بعد التهيئة
     );
   }
 }

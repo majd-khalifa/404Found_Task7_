@@ -1,45 +1,60 @@
-// ignore_for_file: avoid_print
-
 import 'package:dio/dio.dart';
 
+/// ✅ ApiConsumer: ملف عام للتعامل مع الطلبات HTTP باستخدام Dio.
+/// كل Repository يستدعي هذا الملف بدل ما يكرر نفس الكود.
 class ApiConsumer {
-  final Dio _dio =
-      Dio(
-          BaseOptions(
-            baseUrl: "https://fakestoreapi.com",
-            connectTimeout: Duration(seconds: 10),
-            receiveTimeout: Duration(seconds: 10),
-            headers: {"Content-Type": "application/json"},
-          ),
-        )
-        ..interceptors.add(
-          InterceptorsWrapper(
-            onRequest: (options, handler) {
-              print("[${options.method}][${options.uri}]");
-              handler.next(options);
-            },
-            onResponse: (response, handler) {
-              print("${response.data}");
-              handler.next(response);
-            },
-            onError: (error, handler) {
-              print(error.message);
-              handler.next(error);
-            },
-          ),
-        );
-  Future<dynamic> post(String endpoint, {Map<String, dynamic>? body}) async {
-    final response = await _dio.post(endpoint, data: body);
+  final Dio dio;
+
+  ApiConsumer(this.dio);
+
+  /// ✅ GET request
+  Future<dynamic> get(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    final response = await dio.get(path, queryParameters: queryParameters);
     return response.data;
   }
 
-  Future<dynamic> get(String endpoint) async {
-    final response = await _dio.get(endpoint);
+  /// ✅ POST request
+  Future<dynamic> post(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    final response = await dio.post(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+    );
     return response.data;
   }
 
-  Future<dynamic> update(String endpoint, {Map<String, dynamic>? body}) async {
-    final response = await _dio.put(endpoint, data: body);
+  /// ✅ PUT request
+  Future<dynamic> put(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    final response = await dio.put(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+    );
     return response.data;
-  } //تابع التعديل يسخدم في واجهة البروفايل
+  }
+
+  /// ✅ DELETE request
+  Future<dynamic> delete(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    final response = await dio.delete(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+    );
+    return response.data;
+  }
 }
