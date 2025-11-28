@@ -8,22 +8,46 @@ import '../../../core/style/textstyle.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+  final Function(String) onCategorySelected;
+  final String? selectedCategory;
+  final VoidCallback onFilterPressed;
+  final Function(String) onSearch; // ✅ أضفنا البحث
+
+  const HomeHeader({
+    super.key,
+    required this.onCategorySelected,
+    this.selectedCategory,
+    required this.onFilterPressed,
+    required this.onSearch,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SearchBarWithFilter(),
-        SizedBox(height: 24.0.h), // ✅ بدل h * 0.03
-        const SelectCategoryRow(),
+        SearchBarWithFilter(
+          onFilterPressed: onFilterPressed,
+          onSearch: onSearch, // ✅ مرر البحث
+        ),
+        SizedBox(height: 24.0.h),
+        SelectCategoryRow(
+          onCategorySelected: onCategorySelected,
+          selectedCategory: selectedCategory,
+        ),
       ],
     );
   }
 }
 
 class SearchBarWithFilter extends StatelessWidget {
-  const SearchBarWithFilter({super.key});
+  final VoidCallback onFilterPressed;
+  final Function(String) onSearch; // ✅ callback للبحث
+
+  const SearchBarWithFilter({
+    super.key,
+    required this.onFilterPressed,
+    required this.onSearch,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +59,11 @@ class SearchBarWithFilter extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                height: 48.0.h,
+                height: 52.0.h,
                 padding: EdgeInsets.symmetric(horizontal: 20.0.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0.r),
+                  borderRadius: BorderRadius.circular(14.0.r),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.06),
@@ -52,26 +76,31 @@ class SearchBarWithFilter extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       'assets/icons/search.svg',
-                      width: 20.0.w,
-                      height: 20.0.h,
+                      width: 24.0.w,
+                      height: 24.0.h,
                     ),
                     SizedBox(width: 12.0.w),
-                    Text(
-                      "Looking for ......",
-                      style: AppTextStyles.poppinsMedium(
-                        fontSize: 14,
-                        color: const Color(0xFF6A6A6A),
+                    Expanded(
+                      child: TextField(
+                        decoration: const InputDecoration(
+                          hintText: "looking for .....",
+                          border: InputBorder.none,
+                        ),
+                        onSubmitted: onSearch, // ✅ لما يعمل submit
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(width: 12.0.w),
-            SvgPicture.asset(
-              'assets/icons/filter.svg',
-              width: 40.0.w,
-              height: 40.0.h,
+            SizedBox(width: 14.0.w),
+            GestureDetector(
+              onTap: onFilterPressed,
+              child: SvgPicture.asset(
+                'assets/icons/filter.svg',
+                width: 52.0.w,
+                height: 52.0.h,
+              ),
             ),
           ],
         ),
@@ -81,20 +110,23 @@ class SearchBarWithFilter extends StatelessWidget {
 }
 
 class SelectCategoryRow extends StatelessWidget {
-  const SelectCategoryRow({super.key});
+  final Function(String) onCategorySelected;
+  final String? selectedCategory; // ✅ الكاتيجوري الحالي المختار
+
+  const SelectCategoryRow({
+    super.key,
+    required this.onCategorySelected,
+    this.selectedCategory,
+  });
 
   Future<List<String>> fetchCategories() async {
     final response = await http.get(
-      Uri.parse("https://fakestoreapi.com/products"),
+      Uri.parse("https://fakestoreapi.com/products/categories"),
     );
 
     if (response.statusCode == 200) {
       final List data = json.decode(response.body);
-      final categories = data
-          .map((item) => item["category"] as String)
-          .toSet()
-          .toList();
-      return categories;
+      return data.map((item) => item.toString()).toList();
     } else {
       throw Exception("Failed to fetch categories");
     }
@@ -137,29 +169,38 @@ class SelectCategoryRow extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   child: Row(
                     children: categories.map((label) {
-                      return Padding(
-                        padding: EdgeInsets.only(right: 16.0.w),
-                        child: Container(
-                          width: 108.0.w,
-                          height: 40.0.h,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12.0.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.06),
-                                blurRadius: 4.0.r,
-                                offset: const Offset(0, 2),
+                      final isSelected = label == selectedCategory;
+
+                      return GestureDetector(
+                        onTap: () => onCategorySelected(label),
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 16.0.w),
+                          child: Container(
+                            width: 108.0.w,
+                            height: 40.0.h,
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? Colors.green.withOpacity(
+                                      0.3,
+                                    ) // ✅ لون أخضر فاتح للمختار
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(8.0.r),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.06),
+                                  blurRadius: 4.0.r,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              label,
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.poppinsRegular(
+                                fontSize: 12,
+                                color: const Color(0xFF2B2B2B),
                               ),
-                            ],
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            label,
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.poppinsMedium(
-                              fontSize: 12,
-                              color: const Color(0xFF2B2B2B),
                             ),
                           ),
                         ),

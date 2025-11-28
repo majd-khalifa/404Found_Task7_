@@ -9,15 +9,50 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeBody extends StatelessWidget {
   final List<HomeProductModel> products;
+  final List<String>? selectedCategories;
+  final RangeValues? selectedPriceRange;
+  final String? searchQuery; // ✅ نص البحث
 
-  const HomeBody({super.key, required this.products});
+  const HomeBody({
+    super.key,
+    required this.products,
+    this.selectedCategories,
+    this.selectedPriceRange,
+    this.searchQuery,
+  });
 
   @override
   Widget build(BuildContext context) {
+    var filteredProducts = products;
+
+    if (selectedCategories != null && selectedCategories!.isNotEmpty) {
+      filteredProducts = filteredProducts
+          .where((p) => selectedCategories!.contains(p.category))
+          .toList();
+    }
+
+    if (selectedPriceRange != null) {
+      filteredProducts = filteredProducts
+          .where(
+            (p) =>
+                p.price >= selectedPriceRange!.start &&
+                p.price <= selectedPriceRange!.end,
+          )
+          .toList();
+    }
+
+    if (searchQuery != null && searchQuery!.isNotEmpty) {
+      filteredProducts = filteredProducts
+          .where(
+            (p) => p.title.toLowerCase().contains(searchQuery!.toLowerCase()),
+          )
+          .toList();
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PopularTShirtRow(products: products),
+        PopularTShirtRow(products: filteredProducts),
         SizedBox(height: 24.h),
         const NewArrivalsSection(),
       ],
@@ -41,9 +76,10 @@ class PopularTShirtRow extends StatelessWidget {
             children: [
               Text(
                 "Popular T-shirt",
-                style: AppTextStyles.ralewaySemiBold(
+                style: AppTextStyles.ralewayMedium(
                   fontSize: 16,
                   color: const Color(0xFF2B2B2B),
+                  height: 1.5,
                 ),
               ),
               const Spacer(),
@@ -52,7 +88,7 @@ class PopularTShirtRow extends StatelessWidget {
                 child: Text(
                   "See all",
                   style: AppTextStyles.poppinsMedium(
-                    fontSize: 14,
+                    fontSize: 12,
                     color: const Color(0xFF34C759),
                   ),
                 ),
@@ -67,7 +103,7 @@ class PopularTShirtRow extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               itemCount: products.length,
-              separatorBuilder: (_, __) => SizedBox(width: 16.w),
+              separatorBuilder: (_, __) => SizedBox(width: 20.w),
               itemBuilder: (context, index) {
                 final product = products[index];
                 return GestureDetector(
@@ -104,7 +140,7 @@ class ProductCard extends StatelessWidget {
       clipBehavior: Clip.none,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
@@ -136,33 +172,31 @@ class ProductCard extends StatelessWidget {
                     left: 6.w,
                     child: SvgPicture.asset(
                       'assets/icons/heart.svg',
-                      width: 14.w,
-                      height: 14.h,
+                      width: 14.307692527770996.w,
+                      height: 14.307692527770996.h,
                     ),
                   ),
                 ],
               ),
 
-              SizedBox(height: 8.h),
+              SizedBox(height: 12.h),
 
               Container(
                 width: 80.w,
                 height: 16.h,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
                 child: Text(
                   "BEST SELLER",
-                  style: AppTextStyles.ralewayBold(
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 12,
                     color: const Color(0xFF34C759),
                     letterSpacing: 0.2,
+                    height: 1.33,
                   ),
                 ),
               ),
 
-              SizedBox(height: 8.h),
+              SizedBox(height: 4.h),
 
               Text(
                 product.title,
@@ -171,6 +205,7 @@ class ProductCard extends StatelessWidget {
                 style: AppTextStyles.ralewaySemiBold(
                   fontSize: 14,
                   color: const Color(0xFF6A6A6A),
+                  height: 1.42,
                 ),
               ),
 
@@ -181,6 +216,7 @@ class ProductCard extends StatelessWidget {
                 style: AppTextStyles.poppinsMedium(
                   fontSize: 14,
                   color: const Color(0xFF2B2B2B),
+                  height: 1.14,
                 ),
               ),
             ],
@@ -218,7 +254,6 @@ class NewArrivalsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /// العنوان + زر "See all"
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -233,23 +268,23 @@ class NewArrivalsSection extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 "See all",
-                style: AppTextStyles.poppinsMedium(
-                  fontSize: 14,
+                style: AppTextStyles.poppinsRegular(
+                  fontSize: 12,
                   color: const Color(0xFF34C759),
                 ),
               ),
             ),
           ],
         ),
-        SizedBox(height: 12.h),
+        SizedBox(height: 21.h),
 
         /// نفس الكونتينر القديم لكن مع قيم ScreenUtil
         Container(
-          width: 0.94.sw,
-          height: 120.h,
+          width: 355.w,
+          height: 95.h,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(16.r),
             boxShadow: [
               BoxShadow(
                 color: const Color(0x33636363),
@@ -262,94 +297,94 @@ class NewArrivalsSection extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               Positioned(
-                top: 24.h,
-                left: 28.w,
+                top: 20.h,
+                left: 22.w,
                 child: Text(
                   "Summer Sale",
                   style: AppTextStyles.ralewayMedium(
-                    fontSize: 14,
+                    fontSize: 12,
                     color: const Color(0xFF3B3B3B),
                   ),
                 ),
               ),
               Positioned(
-                top: 48.h,
-                left: 28.w,
+                top: 38.h,
+                left: 22.w,
                 child: Transform.scale(
-                  scaleY: 1.4,
+                  scaleY: 0.9,
                   child: Text(
                     "15% OFF",
                     style: AppTextStyles.futuraBlack(
-                      fontSize: 30,
-                      letterSpacing: -1.92,
+                      fontSize: 36,
+                      letterSpacing: -2,
                       color: const Color(0xFF674DC5),
                     ),
                   ),
                 ),
               ),
               Positioned(
-                top: -30.h,
-                left: 160.w,
+                top: -24.24.h,
+                right: 19.76.w,
                 child: Transform.rotate(
                   angle: -1 * 3.1416 / 180,
                   child: Image.asset(
                     'assets/images/shirt.png',
-                    width: 140.w,
-                    height: 140.w,
+                    width: 120.w,
+                    height: 120.w,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               Positioned(
-                top: 20.h,
-                left: 150.w,
+                top: 12.h,
+                right: 131.72.w,
                 child: Transform.rotate(
                   angle: -2.91 * 3.1416 / 180,
                   child: Image.asset(
                     'assets/icons/new.png',
-                    width: 30.w,
-                    height: 30.w,
+                    width: 26.w,
+                    height: 26.w,
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
               Positioned(
-                top: 90.h,
-                left: 12.w,
+                top: 60.h,
+                left: 8.w,
                 child: Image.asset(
                   'assets/icons/sparkle.png',
-                  width: 18.w,
-                  height: 18.w,
+                  width: 15.482769966125488.w,
+                  height: 16.726905822753906.w,
                   color: const Color(0xFF000042),
                 ),
               ),
               Positioned(
-                top: 98.h,
-                left: 170.w,
+                top: 66.h,
+                left: 158.w,
                 child: Image.asset(
                   'assets/icons/sparkle.png',
-                  width: 18.w,
-                  height: 18.w,
+                  width: 15.482769966125488.w,
+                  height: 16.726905822753906.w,
                   color: const Color(0xFF000042),
                 ),
               ),
               Positioned(
-                top: 10.h,
-                left: 140.w,
+                top: 4.h,
+                left: 130.w,
                 child: Image.asset(
                   'assets/icons/sparkle.png',
-                  width: 18.w,
-                  height: 18.w,
+                  width: 15.482769966125488.w,
+                  height: 16.726905822753906.w,
                   color: const Color(0xFF000042),
                 ),
               ),
               Positioned(
-                top: 20.h,
-                left: 340.w,
+                top: 15.h,
+                right: 9.52.w,
                 child: Image.asset(
                   'assets/icons/sparkle.png',
-                  width: 18.w,
-                  height: 18.w,
+                  width: 15.482769966125488.w,
+                  height: 16.726905822753906.w,
                   color: const Color(0xFF000042),
                 ),
               ),

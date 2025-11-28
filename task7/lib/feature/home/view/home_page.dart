@@ -7,9 +7,20 @@ import '../model/home_product_model.dart';
 import '../data/home_repository.dart';
 import 'package:dio/dio.dart';
 import '../../../core/network/api_consumer.dart';
+import '../../../core/widgets/custom_bottom_nav_bar.dart';
+import 'filter_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<String>? selectedCategories;
+  RangeValues? selectedPriceRange;
+  String? searchQuery; // ✅ نص البحث
 
   @override
   Widget build(BuildContext context) {
@@ -24,42 +35,65 @@ class HomePage extends StatelessWidget {
             child: FutureBuilder<List<HomeProductModel>>(
               future: repo.getProducts(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return SizedBox(
-                    height: 400.h,
-                    child: const Center(child: CircularProgressIndicator()),
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      "Error: ${snapshot.error}", // ✅ يظهر الخطأ بدل ما ينهار التطبيق
-                      style: TextStyle(fontSize: 14.sp, color: Colors.red),
-                    ),
-                  );
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(
-                    child: Text(
-                      "No products found",
-                      style: TextStyle(fontSize: 14.sp),
-                    ),
-                  );
-                } else {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CustomAppBar(),
-                      SizedBox(height: 16.h),
-                      const HomeHeader(),
-                      SizedBox(height: 24.h),
-                      HomeBody(products: snapshot.data!),
-                    ],
-                  );
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
                 }
+                final products = snapshot.data!;
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomAppBar(),
+                    SizedBox(height: 16.h),
+                    HomeHeader(
+                      onCategorySelected: (category) {
+                        setState(() {
+                          selectedCategories = [category];
+                        });
+                      },
+                      selectedCategory: selectedCategories?.isNotEmpty == true
+                          ? selectedCategories!.first
+                          : null,
+                      onFilterPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => FilterPage(
+                              categories: products
+                                  .map((p) => p.category)
+                                  .toSet()
+                                  .toList(),
+                              onApply: (cats, range) {
+                                setState(() {
+                                  selectedCategories = cats;
+                                  selectedPriceRange = range;
+                                });
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                      onSearch: (query) {
+                        setState(() {
+                          searchQuery = query;
+                        });
+                      },
+                    ),
+                    SizedBox(height: 24.h),
+                    HomeBody(
+                      products: products,
+                      selectedCategories: selectedCategories,
+                      selectedPriceRange: selectedPriceRange,
+                      searchQuery: searchQuery, // ✅ مرر البحث
+                    ),
+                  ],
+                );
               },
             ),
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }

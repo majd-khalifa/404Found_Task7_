@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'core/style/apptheme/apptheme.dart';
-import 'feature/home/view/home_page.dart';
+import 'app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,15 +16,8 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Task 7',
-          theme: AppTheme.lightTheme,
-          home: child,
-        );
+        return const App(); // ✅ ننادي App بدل MaterialApp مباشرة
       },
-
-      child: const HomePage(),
     );
   }
 }

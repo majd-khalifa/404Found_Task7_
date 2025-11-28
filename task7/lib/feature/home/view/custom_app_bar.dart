@@ -9,15 +9,15 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
       child: SizedBox(
-        height: 48.0.h,
+        height: 44.h,
         child: Row(
           children: [
             SvgPicture.asset(
               'assets/icons/Hamburger.svg',
-              width: 24.0.w,
-              height: 16.0.h,
+              width: 25.71428680419922.w,
+              height: 18.h,
             ),
 
             const Spacer(flex: 2),
@@ -28,17 +28,17 @@ class CustomAppBar extends StatelessWidget {
                 Text(
                   "Explore",
                   style: AppTextStyles.ralewayBold(
-                    fontSize: 20,
+                    fontSize: 32,
                     color: const Color(0xFF2B2B2B),
                   ),
                 ),
                 Positioned(
-                  top: -4.0.h,
+                  top: -10.0.h,
                   left: -16.0.w,
                   child: SvgPicture.asset(
                     'assets/icons/Highlight_05.svg',
-                    width: 16.0.w,
-                    height: 12.0.h,
+                    width: 18.0.w,
+                    height: 19.0.h,
                   ),
                 ),
               ],
@@ -48,8 +48,8 @@ class CustomAppBar extends StatelessWidget {
 
             SvgPicture.asset(
               'assets/icons/bag.svg',
-              width: 40.0.w,
-              height: 40.0.w,
+              width: 44.0.w,
+              height: 44.0.w,
             ),
           ],
         ),

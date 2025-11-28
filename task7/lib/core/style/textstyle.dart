@@ -171,18 +171,18 @@ class AppTextStyles {
       color: color,
     );
   }
-   static TextStyle futuraBlack({
+
+  static TextStyle futuraBlack({
     double fontSize = 36,
     Color color = Colors.black,
     double height = 1.0,
     double letterSpacing = 0,
-  }) =>
-      TextStyle(
-        fontFamily: "Futura",
-        fontWeight: FontWeight.w900,
-        fontSize: fontSize,
-        color: color,
-        height: height,
-        letterSpacing: letterSpacing,
-      );
+  }) => TextStyle(
+    fontFamily: "Futura",
+    fontWeight: FontWeight.w900,
+    fontSize: fontSize,
+    color: color,
+    height: height,
+    letterSpacing: letterSpacing,
+  );
 }
