@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task7/core/style/colors/color.dart';
 
 class AppTextStyles {
   // ========================
@@ -23,7 +24,7 @@ class AppTextStyles {
 
   static TextStyle ralewayMedium({
     double fontSize = 16,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.5,
     double letterSpacing = 0,
   }) {
@@ -55,7 +56,7 @@ class AppTextStyles {
 
   static TextStyle ralewayBold({
     double fontSize = 26,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.0,
     double letterSpacing = 0,
   }) {
@@ -106,7 +107,7 @@ class AppTextStyles {
 
   static TextStyle poppinsMedium({
     double fontSize = 12,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.3,
     double letterSpacing = 0,
   }) {
