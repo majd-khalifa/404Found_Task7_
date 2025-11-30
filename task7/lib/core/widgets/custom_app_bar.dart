@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/style/textstyle.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title; // ✅ العنوان
-  final Color? titleColor; // ✅ لون العنوان
-  final Color? backgroundColor; // ✅ لون الخلفية
-  final VoidCallback? onBack; // ✅ أكشن زر الرجوع
-  final Widget? rightIcon; // ✅ أيقونة يمين قابلة للتغيير
+  final String title;
+  final Color? titleColor;
+  final Color? backgroundColor;
+  final VoidCallback? onBack;
+  final Widget? rightIcon;
 
   const CustomAppBar({
     super.key,
@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               GestureDetector(
                 onTap: onBack ?? () => Navigator.pop(context),
                 child: SvgPicture.asset(
-                  'assets/icons/go_back.svg',
+                  'assets/icons/back.svg',
                   width: 44.w,
                   height: 44.w,
                 ),

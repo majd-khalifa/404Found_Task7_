@@ -1,12 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 
 class ApiConsumer {
   late final Dio _dio;
-  ApiConsumer(String url) {
-     _dio =
+  ApiConsumer(String baseUrl) {
+    _dio =
         Dio(
             BaseOptions(
-              baseUrl: url,
+              baseUrl: baseUrl,
               connectTimeout: Duration(seconds: 30),
               receiveTimeout: Duration(seconds: 30),
               headers: {"Content-Type": "application/json"},

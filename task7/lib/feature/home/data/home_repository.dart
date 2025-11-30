@@ -6,9 +6,7 @@ import '../../../core/network/api_constants.dart';
 import '../model/home_product_model.dart';
 
 class HomeRepository {
-  final ApiConsumer api;
-
-  HomeRepository(this.api);
+  final ApiConsumer api = ApiConsumer(ApiConstants.producturl);
 
   /// ✅ جلب كل المنتجات
   Future<List<HomeProductModel>> getProducts() async {
@@ -28,7 +26,7 @@ class HomeRepository {
   /// ✅ جلب منتج واحد حسب الـ id
   Future<HomeProductModel> getProductById(int id) async {
     try {
-      final response = await api.get("${ApiConstants.products}/$id");
+      final response = await api.get("${ApiConstants.users}/$id");
 
       if (response is Map<String, dynamic>) {
         return HomeProductModel.fromJson(response);
