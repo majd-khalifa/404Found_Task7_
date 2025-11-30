@@ -108,7 +108,9 @@ class CustomBottomNavBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const CartPage()),
+                MaterialPageRoute(
+                  builder: (_) => const CartPage(),
+                ), // ✅ بدون cartItems
               );
             },
             child: Container(

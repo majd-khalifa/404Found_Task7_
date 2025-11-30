@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final VoidCallback? onBack;
   final Widget? rightIcon;
+  final bool showBack; // ✅ خيار إظهار/إخفاء زر الرجوع
 
   const CustomAppBar({
     super.key,
@@ -17,6 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.onBack,
     this.rightIcon,
+    this.showBack = true, // ✅ افتراضي يظهر زر الرجوع
   });
 
   @override
@@ -29,14 +31,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GestureDetector(
-                onTap: onBack ?? () => Navigator.pop(context),
-                child: SvgPicture.asset(
-                  'assets/icons/back.svg',
-                  width: 44.w,
-                  height: 44.w,
-                ),
-              ),
+              // ✅ زر الرجوع اختياري
+              showBack
+                  ? GestureDetector(
+                      onTap: onBack ?? () => Navigator.pop(context),
+                      child: SvgPicture.asset(
+                        'assets/icons/back.svg',
+                        width: 44.w,
+                        height: 44.w,
+                      ),
+                    )
+                  : const SizedBox(width: 44, height: 44),
+
+              // ✅ العنوان
               Text(
                 title,
                 style: AppTextStyles.ralewaySemiBold(
@@ -45,12 +52,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
-              rightIcon ??
-                  SvgPicture.asset(
-                    'assets/icons/bag.svg',
-                    width: 44.w,
-                    height: 44.w,
-                  ),
+
+              // ✅ الأيقونة اليمنى اختياري بالكامل
+              rightIcon ?? const SizedBox(width: 44, height: 44),
             ],
           ),
         ),
