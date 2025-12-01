@@ -4,7 +4,6 @@ import 'package:task7/core/network/api_consumer.dart';
 import 'package:task7/feature/auth/signin/model/login_request.dart';
 import 'package:task7/feature/auth/signin/model/login_respons.dart';
 
-
 class SigninService {
   final ApiConsumer api = ApiConsumer(ApiConstants.authurl);
 

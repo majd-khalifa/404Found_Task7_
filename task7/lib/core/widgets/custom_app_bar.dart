@@ -4,11 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/style/textstyle.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title; // ✅ العنوان
-  final Color? titleColor; // ✅ لون العنوان
-  final Color? backgroundColor; // ✅ لون الخلفية
-  final VoidCallback? onBack; // ✅ أكشن زر الرجوع
-  final Widget? rightIcon; // ✅ أيقونة يمين قابلة للتغيير
+  final String title;
+  final Color? titleColor;
+  final Color? backgroundColor;
+  final VoidCallback? onBack;
+  final Widget? rightIcon;
+  final bool showBack;
 
   const CustomAppBar({
     super.key,
@@ -17,6 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.onBack,
     this.rightIcon,
+    this.showBack = true,
   });
 
   @override
@@ -24,32 +26,34 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       color: backgroundColor ?? Colors.transparent,
       child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GestureDetector(
-              onTap: onBack ?? () => Navigator.pop(context),
-              child: SvgPicture.asset(
-                'assets/icons/go_back.svg',
-                width: 44.w,
-                height: 44.w,
-              ),
-            ),
-            Text(
-              title,
-              style: AppTextStyles.ralewaySemiBold(
-                fontSize: 16.sp,
-                color: titleColor ?? const Color(0xFF2B2B2B),
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-            rightIcon ??
-                SvgPicture.asset(
-                  'assets/icons/bag.svg',
-                  width: 44.w,
-                  height: 44.w,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              showBack
+                  ? GestureDetector(
+                      onTap: onBack ?? () => Navigator.pop(context),
+                      child: SvgPicture.asset(
+                        'assets/icons/back.svg',
+                        width: 44.w,
+                        height: 44.w,
+                      ),
+                    )
+                  : const SizedBox(width: 44, height: 44),
+
+              Text(
+                title,
+                style: AppTextStyles.ralewaySemiBold(
+                  fontSize: 16.sp,
+                  color: titleColor ?? const Color(0xFF2B2B2B),
                 ),
-          ],
+                overflow: TextOverflow.ellipsis,
+              ),
+
+              rightIcon ?? const SizedBox(width: 44, height: 44),
+            ],
+          ),
         ),
       ),
     );

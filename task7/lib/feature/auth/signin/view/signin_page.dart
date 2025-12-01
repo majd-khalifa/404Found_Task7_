@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print, avoid_unnecessary_containers
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +40,8 @@ class _SigninPageState extends State<SigninPage> {
       password: passwordcontroller.text,
     );
     try {
-      await signinservice.login(req);
+      // ignore: unused_local_variable
+      final res = await signinservice.login(req);
 
       Snackbar.show(
         context,

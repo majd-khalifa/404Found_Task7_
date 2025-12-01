@@ -1,8 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-// استدعاء الصفحات من feature
 import '../../feature/home/view/home_page.dart';
 import '../../feature/favorites/view/favorites_page.dart';
 import '../../feature/notifications/view/notifications_page.dart';
@@ -18,13 +18,11 @@ class CustomBottomNavBar extends StatelessWidget {
       clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
       children: [
-        // الخلفية المنحنية
         CustomPaint(
           size: Size(MediaQuery.of(context).size.width, 106.h),
           painter: _NavBarPainter(),
         ),
 
-        // الأيقونات الجانبية
         Positioned(
           bottom: 0,
           child: Container(
@@ -62,7 +60,7 @@ class CustomBottomNavBar extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(width: 88.w), // فراغ للـ Cart
+                SizedBox(width: 88.w),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -98,7 +96,6 @@ class CustomBottomNavBar extends StatelessWidget {
           ),
         ),
 
-        // أيقونة Cart في المنتصف مع ظل
         Positioned(
           bottom: 40.h,
           left: (MediaQuery.of(context).size.width / 2) - (112.w / 2),
@@ -117,9 +114,9 @@ class CustomBottomNavBar extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: const Color(0x5B9EE199),
-                    offset: const Offset(0, 8),
+                    offset: const Offset(0, 0),
                     blurRadius: 24,
-                    spreadRadius: 0,
+                    spreadRadius: -8,
                   ),
                 ],
               ),
@@ -149,7 +146,6 @@ class _NavBarPainter extends CustomPainter {
 
     final Path path = Path();
 
-    // الزاوية اليسار: خط مائل من الطرف للنصف
     path.moveTo(0, -25.h);
     path.quadraticBezierTo(
       size.width * 0.15,
@@ -158,7 +154,6 @@ class _NavBarPainter extends CustomPainter {
       0,
     );
 
-    // منحنى الـ notch
     path.quadraticBezierTo(
       centerX - fabRadius * 0.99,
       0,
@@ -177,22 +172,17 @@ class _NavBarPainter extends CustomPainter {
       0,
     );
 
-    // الزاوية اليمين: خط مائل من الطرف للنصف
     path.quadraticBezierTo(size.width * 0.85, 6.h, size.width, -25.h);
 
-    // الحواف السفلية
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
 
     path.close();
 
-    // ظل
     canvas.drawShadow(path, Colors.black26, 8.0, true);
 
-    // تعبئة
     canvas.drawPath(path, paint);
 
-    // حدود خفيفة
     final Paint stroke = Paint()
       ..color = const Color(0xFF83AAD1).withOpacity(0.2)
       ..style = PaintingStyle.stroke

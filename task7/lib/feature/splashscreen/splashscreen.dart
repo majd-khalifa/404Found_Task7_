@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task7/feature/auth/signin/view/signin_page.dart';
@@ -36,10 +38,6 @@ class _SplashscreenState extends State<Splashscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    return Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
