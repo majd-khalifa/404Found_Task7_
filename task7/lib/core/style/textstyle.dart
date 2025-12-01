@@ -8,7 +8,7 @@ class AppTextStyles {
   // ========================
   static TextStyle ralewayRegular({
     double fontSize = 14,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.2,
     double letterSpacing = 0,
   }) {
@@ -40,7 +40,7 @@ class AppTextStyles {
 
   static TextStyle ralewaySemiBold({
     double fontSize = 16,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.25,
     double letterSpacing = 0,
   }) {
@@ -72,7 +72,7 @@ class AppTextStyles {
 
   static TextStyle ralewayBlack({
     double fontSize = 36,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.02,
     double letterSpacing = -0.72,
   }) {
@@ -91,7 +91,7 @@ class AppTextStyles {
   // ========================
   static TextStyle poppinsRegular({
     double fontSize = 11,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.8,
     double letterSpacing = 0,
   }) {
@@ -123,7 +123,7 @@ class AppTextStyles {
 
   static TextStyle poppinsSemiBold({
     double fontSize = 14,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.4,
     double letterSpacing = 0,
   }) {
@@ -139,7 +139,7 @@ class AppTextStyles {
 
   static TextStyle poppinsBold({
     double fontSize = 24,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.0,
     double letterSpacing = 0,
   }) {
@@ -158,7 +158,7 @@ class AppTextStyles {
   // ========================
   static TextStyle readMoreStyle({
     double fontSize = 14,
-    Color color = Colors.green,
+    Color color = myblack,
     double height = 1.0,
     double letterSpacing = 0,
     FontWeight fontWeight = FontWeight.w400,
@@ -175,7 +175,7 @@ class AppTextStyles {
 
   static TextStyle futuraBlack({
     double fontSize = 36,
-    Color color = Colors.black,
+    Color color = myblack,
     double height = 1.0,
     double letterSpacing = 0,
   }) => TextStyle(

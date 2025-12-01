@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:task7/feature/auth/signin/view/signin_page.dart';
+import 'package:task7/feature/splashscreen/splashscreen.dart';
 import 'core/style/apptheme/apptheme.dart';
 import 'feature/home/view/home_page.dart';
 import 'feature/favorites/view/favorites_page.dart';
@@ -14,12 +16,15 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Task 7',
       theme: AppTheme.lightTheme,
-      initialRoute: '/home',
+      initialRoute: '/favorites',
       routes: {
         '/home': (context) => const HomePage(),
         '/favorites': (context) => const FavoritesPage(),
         '/notifications': (context) => const NotificationsPage(),
         '/profile': (context) => const ProfilePage(),
+        '/splash_screen': (context) => const Splashscreen(),
+        '/notification': (context) => const NotificationsPage(),
+        '/login': (context) => const SigninPage(),
       },
     );
   }

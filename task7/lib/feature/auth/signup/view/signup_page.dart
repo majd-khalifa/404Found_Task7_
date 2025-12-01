@@ -4,7 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:task7/core/network/api_constans.dart';
+import 'package:task7/core/network/api_constants.dart';
+// import 'package:task7/core/network/api_constans.dart';
 import 'package:task7/core/network/api_consumer.dart';
 
 import 'package:task7/core/style/colors/color.dart';
@@ -27,7 +28,7 @@ class _SignupPageState extends State<SignupPage> {
   final usernamecontroller = TextEditingController();
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
-  final ApiConsumer api = ApiConsumer(ApiConstans.authurl);
+  final ApiConsumer api = ApiConsumer(ApiConstants.authurl);
 
   bool isloading = false;
   Future<void> signup() async {

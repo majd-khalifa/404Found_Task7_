@@ -38,7 +38,7 @@ class _SigninPageState extends State<SigninPage> {
       password: passwordcontroller.text,
     );
     try {
-      final res = await signinservice.login(req);
+      await signinservice.login(req);
 
       Snackbar.show(
         context,

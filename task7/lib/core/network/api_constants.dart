@@ -1,5 +1,7 @@
 class ApiConstants {
-  static const String baseUrl = "https://fakestoreapi.com";
-  static const String products = "$baseUrl/products";
-  static const String users = "$baseUrl/users";
+  static const String producturl = "https://fakestoreapi.com";
+  static const String authurl = "https://dummyjson.com";
+
+  static const String products = "/products";
+  static const String users = "/auth/login";
 }

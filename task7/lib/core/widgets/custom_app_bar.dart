@@ -24,35 +24,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       color: backgroundColor ?? Colors.transparent,
       child: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: onBack ?? () => Navigator.pop(context),
-                child: SvgPicture.asset(
-                  'assets/icons/go_back.svg',
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: onBack ?? () => Navigator.pop(context),
+              child: SvgPicture.asset(
+                'assets/icons/go_back.svg',
+                width: 44.w,
+                height: 44.w,
+              ),
+            ),
+            Text(
+              title,
+              style: AppTextStyles.ralewaySemiBold(
+                fontSize: 16.sp,
+                color: titleColor ?? const Color(0xFF2B2B2B),
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+            rightIcon ??
+                SvgPicture.asset(
+                  'assets/icons/bag.svg',
                   width: 44.w,
                   height: 44.w,
                 ),
-              ),
-              Text(
-                title,
-                style: AppTextStyles.ralewaySemiBold(
-                  fontSize: 16.sp,
-                  color: titleColor ?? const Color(0xFF2B2B2B),
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-              rightIcon ??
-                  SvgPicture.asset(
-                    'assets/icons/bag.svg',
-                    width: 44.w,
-                    height: 44.w,
-                  ),
-            ],
-          ),
+          ],
         ),
       ),
     );

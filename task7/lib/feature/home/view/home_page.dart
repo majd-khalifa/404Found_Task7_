@@ -5,8 +5,6 @@ import 'home_header.dart';
 import 'home_body.dart';
 import '../model/home_product_model.dart';
 import '../data/home_repository.dart';
-import 'package:dio/dio.dart';
-import '../../../core/network/api_consumer.dart';
 import '../../../core/widgets/custom_bottom_nav_bar.dart';
 import 'filter_page.dart';
 
@@ -24,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final repo = HomeRepository(ApiConsumer(Dio()));
+    final repo = HomeRepository();
 
     return Scaffold(
       body: SafeArea(

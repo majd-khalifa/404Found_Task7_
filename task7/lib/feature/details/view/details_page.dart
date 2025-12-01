@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/network/api_consumer.dart';
 import '../data/details_repository.dart';
 import '../model/details_product_model.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import 'custom_bottom_bar.dart';
 import 'details_body.dart';
-import 'package:dio/dio.dart';
 
 class DetailsPage extends StatelessWidget {
   final int productId;
@@ -15,7 +13,7 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repo = DetailsRepository(ApiConsumer(Dio()));
+    final repo = DetailsRepository();
 
     return Scaffold(
       body: SafeArea(
