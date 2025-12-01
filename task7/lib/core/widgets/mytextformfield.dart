@@ -12,19 +12,21 @@ class Mytextformfield extends StatelessWidget {
   const Mytextformfield({
     super.key,
     required this.hinttext,
-    required this.letterspacing, required this.controller,required this.validator,
+    required this.letterspacing,
+    required this.controller,
+    required this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 335.w,
+      width: 1.sw,
       height: 48.h,
       child: Opacity(
         opacity: 0.6,
         child: TextFormField(
-          validator:validator ,
-          controller:controller ,
+          validator: validator,
+          controller: controller,
           decoration: InputDecoration(
             hintText: hinttext,
             filled: true,

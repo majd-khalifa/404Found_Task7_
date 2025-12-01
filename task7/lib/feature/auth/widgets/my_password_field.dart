@@ -25,7 +25,7 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 335.w,
+      width: 1.sw,
       height: 48.h,
       child: Opacity(
         opacity: 0.6,
