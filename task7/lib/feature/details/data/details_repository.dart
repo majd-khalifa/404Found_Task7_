@@ -8,7 +8,6 @@ class DetailsRepository {
 
   DetailsRepository();
 
-  /// ✅ جلب تفاصيل منتج واحد حسب الـ id
   Future<DetailsProductModel> getProductDetails(int id) async {
     try {
       final response = await api.get("${ApiConstants.products}/$id");

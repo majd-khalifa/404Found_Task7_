@@ -15,13 +15,11 @@ class CartPage extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(title: ("My Cart")),
-      bottomNavigationBar: const CheckoutBar(), // ✅ مثبت بأسفل الشاشة
+      bottomNavigationBar: const CheckoutBar(),
       body: cartItems.isEmpty
           ? const Center(child: Text("Your cart is empty"))
           : SingleChildScrollView(
-              padding: EdgeInsets.only(
-                bottom: 24.h,
-              ), // ✅ مساحة بسيطة تحت المحتوى
+              padding: EdgeInsets.only(bottom: 24.h),
               child: Column(
                 children: [
                   SizedBox(height: 20.h),

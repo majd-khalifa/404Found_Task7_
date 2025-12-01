@@ -13,7 +13,7 @@ class CustomBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 72.h, // ✅ responsive height
+      height: 72.h,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +33,6 @@ class CustomBottomBar extends StatelessWidget {
 
           SizedBox(width: 32.w),
 
-          // ✅ زر إضافة للسلة
           GestureDetector(
             onTap: () {
               final cartItem = CartItemModel(

@@ -17,7 +17,6 @@ class DetailsProductModel extends Equatable {
     required this.category,
   });
 
-  /// ✅ Factory method لتحويل JSON إلى موديل
   factory DetailsProductModel.fromJson(Map<String, dynamic> json) {
     return DetailsProductModel(
       id: json['id'] as int,
@@ -29,7 +28,6 @@ class DetailsProductModel extends Equatable {
     );
   }
 
-  /// ✅ تحويل الموديل إلى JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -41,7 +39,6 @@ class DetailsProductModel extends Equatable {
     };
   }
 
-  /// ✅ copyWith لتعديل قيم معينة بدون إنشاء موديل جديد كامل
   DetailsProductModel copyWith({
     int? id,
     String? title,
@@ -60,11 +57,9 @@ class DetailsProductModel extends Equatable {
     );
   }
 
-  /// ✅ props من Equatable (تغني عن == و hashCode)
   @override
   List<Object?> get props => [id, title, image, price, description, category];
 
-  /// ✅ toString لسهولة الطباعة أثناء الـ debugging
   @override
   String toString() {
     return 'DetailsProductModel(id: $id, title: $title, price: $price, category: $category)';

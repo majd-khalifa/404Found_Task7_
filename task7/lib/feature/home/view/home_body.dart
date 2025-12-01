@@ -2,16 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:task7/feature/cart/model/cart_product_model.dart';
+import 'package:task7/feature/cart/provider/cart_provider.dart';
+import 'package:task7/feature/home/widgets/sparkle_icon.dart';
 import '../../../core/style/textstyle.dart';
+import '../../../core/style/app_decorations.dart';
+import '../../../core/widgets/app_icon.dart';
 import '../model/home_product_model.dart';
 import '../../details/view/details_page.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeBody extends StatelessWidget {
   final List<HomeProductModel> products;
   final List<String>? selectedCategories;
   final RangeValues? selectedPriceRange;
-  final String? searchQuery; // ✅ نص البحث
+  final String? searchQuery;
 
   const HomeBody({
     super.key,
@@ -137,18 +142,7 @@ class ProductCard extends StatelessWidget {
       width: 0.42.sw,
       height: 220.h,
       padding: EdgeInsets.all(8.w),
-      clipBehavior: Clip.none,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 6.r,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+      decoration: AppDecorations.whiteBox(radius: 16),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -163,24 +157,21 @@ class ProductCard extends StatelessWidget {
                       width: 0.28.sw,
                       height: 0.28.sw,
                       fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) =>
-                          Icon(Icons.error),
+                      errorBuilder: (_, __, ___) => const Icon(Icons.error),
                     ),
                   ),
-                  Positioned(
-                    top: 6.h,
-                    left: 6.w,
-                    child: SvgPicture.asset(
-                      'assets/icons/heart.svg',
-                      width: 14.307692527770996.w,
-                      height: 14.307692527770996.h,
+                  const Positioned(
+                    top: 6,
+                    left: 6,
+                    child: AppIcon(
+                      asset: 'assets/icons/heart.svg',
+                      width: 14,
+                      height: 14,
                     ),
                   ),
                 ],
               ),
-
               SizedBox(height: 12.h),
-
               Container(
                 width: 80.w,
                 height: 16.h,
@@ -195,9 +186,7 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-
               SizedBox(height: 4.h),
-
               Text(
                 product.title,
                 maxLines: 2,
@@ -208,9 +197,7 @@ class ProductCard extends StatelessWidget {
                   height: 1.42,
                 ),
               ),
-
               const Spacer(),
-
               Text(
                 "\$${product.price}",
                 style: AppTextStyles.poppinsMedium(
@@ -225,19 +212,18 @@ class ProductCard extends StatelessWidget {
           Positioned(
             bottom: -9.h,
             right: -9.w,
-            child: Container(
-              width: 34.w,
-              height: 35.5.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  'assets/icons/plus.svg',
-                  width: 34.w,
-                  height: 35.5.h,
-                ),
-              ),
+            child: AppIcon(
+              asset: 'assets/icons/plus.svg',
+              width: 34,
+              height: 35.5,
+              onTap: () {
+                final cartItem = CartItemModel.fromHomeProduct(product);
+                context.read<CartProvider>().addItem(cartItem);
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("${product.title} added to cart")),
+                );
+              },
             ),
           ),
         ],
@@ -278,13 +264,10 @@ class NewArrivalsSection extends StatelessWidget {
         ),
         SizedBox(height: 21.h),
 
-        /// نفس الكونتينر القديم لكن مع قيم ScreenUtil
         Container(
           width: 355.w,
           height: 95.h,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16.r),
+          decoration: AppDecorations.whiteBox(radius: 16).copyWith(
             boxShadow: [
               BoxShadow(
                 color: const Color(0x33636363),
@@ -348,45 +331,14 @@ class NewArrivalsSection extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                top: 60.h,
-                left: 8.w,
-                child: Image.asset(
-                  'assets/icons/sparkle.png',
-                  width: 15.482769966125488.w,
-                  height: 16.726905822753906.w,
-                  color: const Color(0xFF000042),
-                ),
-              ),
-              Positioned(
-                top: 66.h,
-                left: 158.w,
-                child: Image.asset(
-                  'assets/icons/sparkle.png',
-                  width: 15.482769966125488.w,
-                  height: 16.726905822753906.w,
-                  color: const Color(0xFF000042),
-                ),
-              ),
-              Positioned(
-                top: 4.h,
-                left: 130.w,
-                child: Image.asset(
-                  'assets/icons/sparkle.png',
-                  width: 15.482769966125488.w,
-                  height: 16.726905822753906.w,
-                  color: const Color(0xFF000042),
-                ),
-              ),
-              Positioned(
-                top: 15.h,
-                right: 9.52.w,
-                child: Image.asset(
-                  'assets/icons/sparkle.png',
-                  width: 15.482769966125488.w,
-                  height: 16.726905822753906.w,
-                  color: const Color(0xFF000042),
-                ),
+              const Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  SparkleIcon(top: 60, left: 8),
+                  SparkleIcon(top: 66, left: 158),
+                  SparkleIcon(top: 4, left: 130),
+                  SparkleIcon(top: 15, right: 9.52),
+                ],
               ),
             ],
           ),

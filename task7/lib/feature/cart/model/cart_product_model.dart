@@ -1,3 +1,5 @@
+import '../../home/model/home_product_model.dart';
+
 class CartItemModel {
   final int id;
   final String title;
@@ -13,7 +15,16 @@ class CartItemModel {
     this.quantity = 1,
   });
 
-  // ✅ تحويل إلى Map (مفيد للتخزين أو الـ JSON)
+  factory CartItemModel.fromHomeProduct(HomeProductModel product) {
+    return CartItemModel(
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      imageUrl: product.image,
+      quantity: 1,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -24,7 +35,6 @@ class CartItemModel {
     };
   }
 
-  // ✅ إنشاء من Map (مفيد عند القراءة من قاعدة بيانات أو API)
   factory CartItemModel.fromMap(Map<String, dynamic> map) {
     return CartItemModel(
       id: map['id'] as int,

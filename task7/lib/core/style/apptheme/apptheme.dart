@@ -9,14 +9,11 @@ class AppTheme {
 
       colorScheme: ColorScheme.fromSwatch().copyWith(
         primary: const Color(0xFF2B2B2B),
-        secondary: const Color(0xFF4CAF50), // ✅ لون ثانوي (مثلاً للأزرار)
+        secondary: const Color(0xFF4CAF50),
       ),
 
       textTheme: TextTheme(
-        bodyMedium: TextStyle(
-          fontSize: 14.sp, // ✅ متجاوب مع الشاشة
-          color: const Color(0xFF2B2B2B),
-        ),
+        bodyMedium: TextStyle(fontSize: 14.sp, color: const Color(0xFF2B2B2B)),
         bodyLarge: TextStyle(
           fontSize: 16.sp,
           fontWeight: FontWeight.w500,
@@ -33,7 +30,7 @@ class AppTheme {
         backgroundColor: Colors.grey[300],
         elevation: 0,
         titleTextStyle: TextStyle(
-          fontSize: 18.sp, // ✅ متجاوب
+          fontSize: 18.sp,
           fontWeight: FontWeight.bold,
           color: const Color(0xFF2B2B2B),
         ),
@@ -41,7 +38,7 @@ class AppTheme {
       ),
 
       buttonTheme: ButtonThemeData(
-        buttonColor: const Color(0xFF4CAF50), // ✅ لون الأزرار
+        buttonColor: const Color(0xFF4CAF50),
         textTheme: ButtonTextTheme.primary,
       ),
     );

@@ -5,6 +5,7 @@ import 'feature/home/view/home_page.dart';
 import 'feature/favorites/view/favorites_page.dart';
 import 'feature/notifications/view/notifications_page.dart';
 import 'feature/profile/view/profile_page.dart';
+import 'feature/cart/view/cart_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
         '/notifications': (context) => const NotificationsPage(),
         '/profile': (context) => const ProfilePage(),
         '/splash_screen': (context) => const Splashscreen(),
+        '/cart': (context) => const CartPage(),
       },
     );
   }

@@ -1,17 +1,19 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task7/core/errors/error_message.dart';
 import '../../../core/style/textstyle.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import '../../../core/widgets/app_icon.dart';
+import '../../../core/style/app_decorations.dart';
 
 class HomeHeader extends StatelessWidget {
   final Function(String) onCategorySelected;
   final String? selectedCategory;
   final VoidCallback onFilterPressed;
-  final Function(String) onSearch; // ✅ أضفنا البحث
+  final Function(String) onSearch;
 
   const HomeHeader({
     super.key,
@@ -27,7 +29,7 @@ class HomeHeader extends StatelessWidget {
       children: [
         SearchBarWithFilter(
           onFilterPressed: onFilterPressed,
-          onSearch: onSearch, // ✅ مرر البحث
+          onSearch: onSearch,
         ),
         SizedBox(height: 24.0.h),
         SelectCategoryRow(
@@ -41,7 +43,7 @@ class HomeHeader extends StatelessWidget {
 
 class SearchBarWithFilter extends StatelessWidget {
   final VoidCallback onFilterPressed;
-  final Function(String) onSearch; // ✅ callback للبحث
+  final Function(String) onSearch;
 
   const SearchBarWithFilter({
     super.key,
@@ -61,23 +63,13 @@ class SearchBarWithFilter extends StatelessWidget {
               child: Container(
                 height: 52.0.h,
                 padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14.0.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.06),
-                      blurRadius: 6.0.r,
-                      offset: Offset(0, 4.0.h),
-                    ),
-                  ],
-                ),
+                decoration: AppDecorations.whiteBox(radius: 14),
                 child: Row(
                   children: [
-                    SvgPicture.asset(
-                      'assets/icons/search.svg',
-                      width: 24.0.w,
-                      height: 24.0.h,
+                    const AppIcon(
+                      asset: 'assets/icons/search.svg',
+                      width: 24,
+                      height: 24,
                     ),
                     SizedBox(width: 12.0.w),
                     Expanded(
@@ -86,7 +78,7 @@ class SearchBarWithFilter extends StatelessWidget {
                           hintText: "looking for .....",
                           border: InputBorder.none,
                         ),
-                        onSubmitted: onSearch, // ✅ لما يعمل submit
+                        onSubmitted: onSearch,
                       ),
                     ),
                   ],
@@ -94,13 +86,11 @@ class SearchBarWithFilter extends StatelessWidget {
               ),
             ),
             SizedBox(width: 14.0.w),
-            GestureDetector(
+            AppIcon(
+              asset: 'assets/icons/filter.svg',
+              width: 52,
+              height: 52,
               onTap: onFilterPressed,
-              child: SvgPicture.asset(
-                'assets/icons/filter.svg',
-                width: 52.0.w,
-                height: 52.0.h,
-              ),
             ),
           ],
         ),
@@ -111,7 +101,7 @@ class SearchBarWithFilter extends StatelessWidget {
 
 class SelectCategoryRow extends StatelessWidget {
   final Function(String) onCategorySelected;
-  final String? selectedCategory; // ✅ الكاتيجوري الحالي المختار
+  final String? selectedCategory;
 
   const SelectCategoryRow({
     super.key,
@@ -158,9 +148,11 @@ class SelectCategoryRow extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return const Text("Error fetching categories");
+                  return const ErrorMessage(
+                    message: "Error fetching categories",
+                  );
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Text("No categories found");
+                  return const ErrorMessage(message: "No categories found");
                 }
 
                 final categories = snapshot.data!;
@@ -178,21 +170,12 @@ class SelectCategoryRow extends StatelessWidget {
                           child: Container(
                             width: 108.0.w,
                             height: 40.0.h,
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? Colors.green.withOpacity(
-                                      0.3,
-                                    ) // ✅ لون أخضر فاتح للمختار
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(8.0.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.06),
-                                  blurRadius: 4.0.r,
-                                  offset: const Offset(0, 2),
+                            decoration: AppDecorations.whiteBox(radius: 8)
+                                .copyWith(
+                                  color: isSelected
+                                      ? Colors.green.withOpacity(0.3)
+                                      : Colors.white,
                                 ),
-                              ],
-                            ),
                             alignment: Alignment.center,
                             child: Text(
                               label,

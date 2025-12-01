@@ -6,9 +6,7 @@ class CartProvider extends ChangeNotifier {
 
   List<CartItemModel> get items => List.unmodifiable(_items);
 
-  // ✅ إضافة منتج للسلة
   void addItem(CartItemModel item) {
-    // إذا المنتج موجود مسبقًا، زيد الكمية بدل إضافة نسخة جديدة
     final index = _items.indexWhere((element) => element.id == item.id);
     if (index != -1) {
       _items[index].quantity += item.quantity;
@@ -18,13 +16,11 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ✅ حذف منتج من السلة
   void removeItem(CartItemModel item) {
     _items.removeWhere((element) => element.id == item.id);
     notifyListeners();
   }
 
-  // ✅ زيادة الكمية
   void incrementQuantity(CartItemModel item) {
     final index = _items.indexWhere((element) => element.id == item.id);
     if (index != -1) {
@@ -33,7 +29,6 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  // ✅ إنقاص الكمية
   void decrementQuantity(CartItemModel item) {
     final index = _items.indexWhere((element) => element.id == item.id);
     if (index != -1 && _items[index].quantity > 1) {
@@ -42,12 +37,10 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  // ✅ حساب المجموع الكلي
   double get totalPrice {
     return _items.fold(0, (sum, item) => sum + (item.price * item.quantity));
   }
 
-  // ✅ تفريغ السلة
   void clearCart() {
     _items.clear();
     notifyListeners();

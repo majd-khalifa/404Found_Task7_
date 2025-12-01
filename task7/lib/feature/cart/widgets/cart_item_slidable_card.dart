@@ -12,8 +12,8 @@ class CartItemSlidableCard extends StatelessWidget {
   final VoidCallback onDelete;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
-  final bool showHeader; // ✅ لتحديد إذا بدنا نعرض العنوان
-  final int itemCount; // ✅ العدد الكلي
+  final bool showHeader;
+  final int itemCount;
 
   const CartItemSlidableCard({
     super.key,
@@ -29,7 +29,6 @@ class CartItemSlidableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ✅ العنوان "X Items" يظهر فقط إذا showHeader = true
         if (showHeader)
           Padding(
             padding: EdgeInsets.only(left: 20.w, top: 24.h),
@@ -48,7 +47,6 @@ class CartItemSlidableCard extends StatelessWidget {
         Slidable(
           key: ValueKey(item.id),
 
-          // ✅ السحب لليمين: زيادة/إنقاص الكمية
           startActionPane: ActionPane(
             motion: const DrawerMotion(),
             extentRatio: 0.18,
@@ -62,7 +60,6 @@ class CartItemSlidableCard extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // ✅ زر زائد بمساحة ضغط أكبر
                       InkWell(
                         onTap: onIncrement,
                         borderRadius: BorderRadius.circular(8),
@@ -85,7 +82,6 @@ class CartItemSlidableCard extends StatelessWidget {
                         ),
                       ),
 
-                      // ✅ زر ناقص بمساحة ضغط أكبر
                       InkWell(
                         onTap: onDecrement,
                         borderRadius: BorderRadius.circular(8),
@@ -106,7 +102,6 @@ class CartItemSlidableCard extends StatelessWidget {
             ],
           ),
 
-          // ✅ السحب لليسار: حذف
           endActionPane: ActionPane(
             motion: const DrawerMotion(),
             extentRatio: 0.18,
@@ -130,7 +125,6 @@ class CartItemSlidableCard extends StatelessWidget {
             ],
           ),
 
-          // ✅ الكارت نفسه
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
             child: Container(

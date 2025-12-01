@@ -13,7 +13,6 @@ class HomeProductModel {
     required this.category,
   });
 
-  // ✅ Factory method لتحويل JSON إلى موديل
   factory HomeProductModel.fromJson(Map<String, dynamic> json) {
     return HomeProductModel(
       id: json['id'] as int,
@@ -24,7 +23,6 @@ class HomeProductModel {
     );
   }
 
-  // ✅ تحويل الموديل إلى JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -35,7 +33,6 @@ class HomeProductModel {
     };
   }
 
-  // ✅ copyWith لتعديل قيم معينة بدون إنشاء موديل جديد كامل
   HomeProductModel copyWith({
     int? id,
     String? title,
@@ -52,7 +49,6 @@ class HomeProductModel {
     );
   }
 
-  // ✅ مقارنة بين موديلات (مفيد مع Bloc أو Provider)
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
