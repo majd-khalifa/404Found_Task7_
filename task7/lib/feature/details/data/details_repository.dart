@@ -4,11 +4,10 @@ import '../../../core/network/api_constants.dart';
 import '../model/details_product_model.dart';
 
 class DetailsRepository {
-  final ApiConsumer api;
+  final ApiConsumer api = ApiConsumer(ApiConstants.producturl);
 
-  DetailsRepository(this.api);
+  DetailsRepository();
 
-  /// ✅ جلب تفاصيل منتج واحد حسب الـ id
   Future<DetailsProductModel> getProductDetails(int id) async {
     try {
       final response = await api.get("${ApiConstants.products}/$id");

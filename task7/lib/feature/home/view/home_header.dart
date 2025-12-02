@@ -1,29 +1,55 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task7/core/errors/error_message.dart';
 import '../../../core/style/textstyle.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import '../../../core/widgets/app_icon.dart';
+import '../../../core/style/app_decorations.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+  final Function(String) onCategorySelected;
+  final String? selectedCategory;
+  final VoidCallback onFilterPressed;
+  final Function(String) onSearch;
+
+  const HomeHeader({
+    super.key,
+    required this.onCategorySelected,
+    this.selectedCategory,
+    required this.onFilterPressed,
+    required this.onSearch,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SearchBarWithFilter(),
-        SizedBox(height: 24.0.h), // ✅ بدل h * 0.03
-        const SelectCategoryRow(),
+        SearchBarWithFilter(
+          onFilterPressed: onFilterPressed,
+          onSearch: onSearch,
+        ),
+        SizedBox(height: 24.0.h),
+        SelectCategoryRow(
+          onCategorySelected: onCategorySelected,
+          selectedCategory: selectedCategory,
+        ),
       ],
     );
   }
 }
 
 class SearchBarWithFilter extends StatelessWidget {
-  const SearchBarWithFilter({super.key});
+  final VoidCallback onFilterPressed;
+  final Function(String) onSearch;
+
+  const SearchBarWithFilter({
+    super.key,
+    required this.onFilterPressed,
+    required this.onSearch,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,43 +61,36 @@ class SearchBarWithFilter extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                height: 48.0.h,
+                height: 52.0.h,
                 padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.06),
-                      blurRadius: 6.0.r,
-                      offset: Offset(0, 4.0.h),
-                    ),
-                  ],
-                ),
+                decoration: AppDecorations.whiteBox(radius: 14),
                 child: Row(
                   children: [
-                    SvgPicture.asset(
-                      'assets/icons/search.svg',
-                      width: 20.0.w,
-                      height: 20.0.h,
+                    const AppIcon(
+                      asset: 'assets/icons/search.svg',
+                      width: 24,
+                      height: 24,
                     ),
                     SizedBox(width: 12.0.w),
-                    Text(
-                      "Looking for ......",
-                      style: AppTextStyles.poppinsMedium(
-                        fontSize: 14,
-                        color: const Color(0xFF6A6A6A),
+                    Expanded(
+                      child: TextField(
+                        decoration: const InputDecoration(
+                          hintText: "looking for .....",
+                          border: InputBorder.none,
+                        ),
+                        onSubmitted: onSearch,
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(width: 12.0.w),
-            SvgPicture.asset(
-              'assets/icons/filter.svg',
-              width: 40.0.w,
-              height: 40.0.h,
+            SizedBox(width: 14.0.w),
+            AppIcon(
+              asset: 'assets/icons/filter.svg',
+              width: 52,
+              height: 52,
+              onTap: onFilterPressed,
             ),
           ],
         ),
@@ -81,20 +100,23 @@ class SearchBarWithFilter extends StatelessWidget {
 }
 
 class SelectCategoryRow extends StatelessWidget {
-  const SelectCategoryRow({super.key});
+  final Function(String) onCategorySelected;
+  final String? selectedCategory;
+
+  const SelectCategoryRow({
+    super.key,
+    required this.onCategorySelected,
+    this.selectedCategory,
+  });
 
   Future<List<String>> fetchCategories() async {
     final response = await http.get(
-      Uri.parse("https://fakestoreapi.com/products"),
+      Uri.parse("https://fakestoreapi.com/products/categories"),
     );
 
     if (response.statusCode == 200) {
       final List data = json.decode(response.body);
-      final categories = data
-          .map((item) => item["category"] as String)
-          .toSet()
-          .toList();
-      return categories;
+      return data.map((item) => item.toString()).toList();
     } else {
       throw Exception("Failed to fetch categories");
     }
@@ -126,9 +148,11 @@ class SelectCategoryRow extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return const Text("Error fetching categories");
+                  return const ErrorMessage(
+                    message: "Error fetching categories",
+                  );
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Text("No categories found");
+                  return const ErrorMessage(message: "No categories found");
                 }
 
                 final categories = snapshot.data!;
@@ -137,29 +161,29 @@ class SelectCategoryRow extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   child: Row(
                     children: categories.map((label) {
-                      return Padding(
-                        padding: EdgeInsets.only(right: 16.0.w),
-                        child: Container(
-                          width: 108.0.w,
-                          height: 40.0.h,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12.0.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.06),
-                                blurRadius: 4.0.r,
-                                offset: const Offset(0, 2),
+                      final isSelected = label == selectedCategory;
+
+                      return GestureDetector(
+                        onTap: () => onCategorySelected(label),
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 16.0.w),
+                          child: Container(
+                            width: 108.0.w,
+                            height: 40.0.h,
+                            decoration: AppDecorations.whiteBox(radius: 8)
+                                .copyWith(
+                                  color: isSelected
+                                      ? Colors.green.withOpacity(0.3)
+                                      : Colors.white,
+                                ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              label,
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.poppinsRegular(
+                                fontSize: 12,
+                                color: const Color(0xFF2B2B2B),
                               ),
-                            ],
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            label,
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.poppinsMedium(
-                              fontSize: 12,
-                              color: const Color(0xFF2B2B2B),
                             ),
                           ),
                         ),
