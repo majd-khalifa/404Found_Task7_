@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task7/feature/profile/view/profile_page.dart';
-import 'package:task7/feature/search/view/search_page.dart';
-import 'package:task7/feature/side_menu/view/side_menu_page.dart';
-import 'core/style/apptheme/apptheme.dart';
-import 'feature/home/view/home_page.dart';
+import 'package:provider/provider.dart';
+import 'app.dart';
+import 'feature/cart/provider/cart_provider.dart';
+import 'feature/home/provider/home_provider.dart';
+import 'feature/home/data/home_repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,19 +20,16 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Task 7',
-          theme: AppTheme.lightTheme,
-          home: child,
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => CartProvider()),
+            ChangeNotifierProvider(
+              create: (_) => HomeProvider(HomeRepository())..loadProducts(),
+            ),
+          ],
+          child: const App(),
         );
       },
-
-     // child: const HomePage(),
-    child: const ProfilePage(userId: 2,),
-   // 
-    //child: const SidebarPage(userId: 1),
-
     );
   }
 }
