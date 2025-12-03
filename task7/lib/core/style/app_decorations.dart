@@ -1,19 +1,12 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'app_shadows.dart';
 
 class AppDecorations {
   static BoxDecoration whiteBox({double radius = 14}) {
     return BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(radius),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.06),
-          blurRadius: 6,
-          offset: const Offset(0, 4),
-        ),
-      ],
+      boxShadow: AppShadows.light, // ✅ استدعاء الشادو من الملف
     );
   }
 

@@ -3,9 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Mybottom extends StatelessWidget {
   final Widget widget;
-  final Future Function()? onPressed;
+  final Function()? onPressed;
   final Color color;
-  const Mybottom({super.key, required this.widget, required this.color, this.onPressed});
+  const Mybottom({
+    super.key,
+    required this.widget,
+    required this.color,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/style/textstyle.dart';
 import '../model/details_product_model.dart';
+import 'details_page.dart';
 
 class DetailsBody extends StatelessWidget {
   final DetailsProductModel product;
+  final List<DetailsProductModel> relatedProducts;
 
-  const DetailsBody({super.key, required this.product});
+  const DetailsBody({
+    super.key,
+    required this.product,
+    required this.relatedProducts,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +23,7 @@ class DetailsBody extends StatelessWidget {
         children: [
           SizedBox(height: 20.h),
 
+          // ✅ عنوان المنتج
           Text(
             product.title,
             style: AppTextStyles.ralewaySemiBold(
@@ -27,6 +34,7 @@ class DetailsBody extends StatelessWidget {
 
           SizedBox(height: 8.h),
 
+          // ✅ الفئة
           Text(
             product.category,
             style: AppTextStyles.ralewayRegular(
@@ -39,6 +47,7 @@ class DetailsBody extends StatelessWidget {
 
           SizedBox(height: 12.h),
 
+          // ✅ السعر
           Text(
             "\$${product.price.toStringAsFixed(2)}",
             style: AppTextStyles.poppinsSemiBold(
@@ -49,6 +58,7 @@ class DetailsBody extends StatelessWidget {
 
           SizedBox(height: 16.h),
 
+          // ✅ صورة المنتج الأساسي
           Center(
             child: Image.network(
               product.image,
@@ -58,19 +68,52 @@ class DetailsBody extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: 24.h),
 
-          Center(
-            child: Image.asset(
-              'assets/icons/Slider.png',
-              width: 320.w,
-              height: 60.h,
-              fit: BoxFit.contain,
+          // ✅ باقي المنتجات من نفس الكاتيجوري
+          SizedBox(
+            height: 72.h,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: relatedProducts.length,
+              separatorBuilder: (_, __) => SizedBox(width: 12.w),
+              itemBuilder: (context, index) {
+                final item = relatedProducts[index];
+                return GestureDetector(
+                  onTap: () {
+                    // ✅ الانتقال لصفحة تفاصيل جديدة
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailsPage(productId: item.id),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 56.w,
+                    height: 56.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(color: Colors.white),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.r),
+                      child: Image.network(
+                        item.image,
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
 
           SizedBox(height: 24.h),
 
+          // ✅ الوصف
           Text(
             product.description,
             style: AppTextStyles.poppinsRegular(

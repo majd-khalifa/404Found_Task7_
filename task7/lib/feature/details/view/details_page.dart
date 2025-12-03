@@ -18,8 +18,8 @@ class DetailsPage extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: FutureBuilder<DetailsProductModel>(
-          future: repo.getProductDetails(productId),
+        child: FutureBuilder<List<DetailsProductModel>>(
+          future: repo.getAllProducts(), // ✅ جلب كل المنتجات
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return SizedBox(
@@ -27,16 +27,28 @@ class DetailsPage extends StatelessWidget {
                 child: const Center(child: CircularProgressIndicator()),
               );
             } else if (snapshot.hasError) {
-              return const ErrorMessage(message: "Error loading product");
-            } else if (!snapshot.hasData) {
-              return const ErrorMessage(message: "No product details found");
+              return const ErrorMessage(message: "Error loading product list");
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const ErrorMessage(message: "No products found");
             } else {
-              final product = snapshot.data!;
+              final allProducts = snapshot.data!;
+              final product = allProducts.firstWhere((p) => p.id == productId);
+              final related = allProducts
+                  .where(
+                    (p) => p.category == product.category && p.id != product.id,
+                  )
+                  .toList();
+
               return Column(
                 children: [
                   const CustomAppBar(title: "T-shirt Shop"),
                   SizedBox(height: 16.h),
-                  Expanded(child: DetailsBody(product: product)),
+                  Expanded(
+                    child: DetailsBody(
+                      product: product,
+                      relatedProducts: related, // ✅ تمرير المنتجات المشابهة
+                    ),
+                  ),
                   SizedBox(height: 12.h),
                   CustomBottomBar(product: product),
                 ],

@@ -11,7 +11,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBack;
   final Widget? rightIcon;
   final bool showBack;
-  final String? backIconPath; // ✅ خيار جديد لتغيير أيقونة الرجوع
+  final String? backIconPath;
+  final String? rightText; // ✅ نص بديل للأيقونة
 
   const CustomAppBar({
     super.key,
@@ -22,7 +23,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onBack,
     this.rightIcon,
     this.showBack = true,
-    this.backIconPath, // ✅
+    this.backIconPath,
+    this.rightText, // ✅
   });
 
   @override
@@ -46,17 +48,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                           shape: BoxShape.circle,
                         ),
                         child: Center(
-                          child: backIconPath != null
-                              ? SvgPicture.asset(
-                                  backIconPath!,
-                                  width: 44.w,
-                                  height: 44.w,
-                                )
-                              : SvgPicture.asset(
-                                  'assets/icons/back.svg', // الافتراضية
-                                  width: 44.w,
-                                  height: 44.w,
-                                ),
+                          child: SvgPicture.asset(
+                            backIconPath ?? 'assets/icons/back.svg',
+                            width: 44.w,
+                            height: 44.h,
+                          ),
                         ),
                       ),
                     )
@@ -71,7 +67,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 overflow: TextOverflow.ellipsis,
               ),
 
-              rightIcon ?? const SizedBox(width: 44, height: 44),
+              // ✅ إذا فيه نص، نعرضه بدل الأيقونة
+              rightText != null
+                  ? GestureDetector(
+                      onTap: () {}, // مجرد clickable بدون حدث
+                      child: Text(
+                        rightText!,
+                        style: AppTextStyles.ralewaySemiBold(
+                          fontSize: 15.sp,
+                          color: Colors.green,
+                        ),
+                      ),
+                    )
+                  : (rightIcon ?? const SizedBox(width: 44, height: 44)),
             ],
           ),
         ),

@@ -66,10 +66,17 @@ class SearchBarWithFilter extends StatelessWidget {
                 decoration: AppDecorations.whiteBox(radius: 14),
                 child: Row(
                   children: [
-                    const AppIcon(
+                    // ✅ أيقونة السيرش مع onTap
+                    AppIcon(
                       asset: 'assets/icons/search.svg',
                       width: 24,
                       height: 24,
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/search',
+                        ); // اسم الـ route
+                      },
                     ),
                     SizedBox(width: 12.0.w),
                     Expanded(

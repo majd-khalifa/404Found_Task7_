@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task7/feature/auth/signin/view/signin_page.dart';
+import 'package:task7/feature/search/view/search_page.dart';
 import 'package:task7/feature/splashscreen/splashscreen.dart';
 import 'core/style/apptheme/apptheme.dart';
 import 'feature/home/view/home_page.dart';
@@ -26,6 +27,7 @@ class App extends StatelessWidget {
         '/splash_screen': (context) => const Splashscreen(),
         '/cart': (context) => const CartPage(),
         '/signin': (context) => const SigninPage(),
+        '/search': (context) => const SearchPage(), // ✅ صفحة البحث
       },
     );
   }
