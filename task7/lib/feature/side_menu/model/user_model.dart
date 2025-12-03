@@ -1,19 +1,19 @@
-// 
 class User {
-  int id;
-  String username;
-  String email;
-  String password;
-  String avatar;
-  String? firstName;
-  String? lastName;
+  final int id;
+  final String username;
+  final String email;
+  final String image; // ✅ بدل avatar
+  final String? firstName;
+  final String? lastName;
+
+  // كلمة المرور ما بترجع من الـ API، فمو ضروري نخزنها هون
+  // إذا بدك تستخدمها بس للـ request، خليها في موديل الـ LoginRequest
 
   User({
     required this.id,
     required this.username,
     required this.email,
-    required this.password,
-    required this.avatar,
+    required this.image,
     this.firstName,
     this.lastName,
   });
@@ -23,19 +23,22 @@ class User {
       id: json['id'] ?? 0,
       username: json['username'] ?? '',
       email: json['email'] ?? '',
-      password: '', 
-      
-      avatar: 'https://i.pravatar.cc/150?img=${json['id'] ?? 1}',
-      firstName: json['name']?['firstname'],
-      lastName: json['name']?['lastname'],
+      image:
+          json['image'] ??
+          'https://ui-avatars.com/api/?name=${json['username'] ?? 'User'}', // ✅ fallback إذا ما رجع صورة
+      firstName: json['firstName'] ?? json['name']?['firstname'],
+      lastName: json['lastName'] ?? json['name']?['lastname'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'username': username,
       'email': email,
-      'password': password,
+      'image': image,
+      'firstName': firstName,
+      'lastName': lastName,
     };
   }
 
@@ -43,8 +46,7 @@ class User {
     int? id,
     String? username,
     String? email,
-    String? password,
-    String? avatar,
+    String? image,
     String? firstName,
     String? lastName,
   }) {
@@ -52,8 +54,7 @@ class User {
       id: id ?? this.id,
       username: username ?? this.username,
       email: email ?? this.email,
-      password: password ?? this.password,
-      avatar: avatar ?? this.avatar,
+      image: image ?? this.image,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
     );

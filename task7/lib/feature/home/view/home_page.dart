@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:task7/feature/side_menu/view/side_menu_page.dart';
 import 'custom_app_bar.dart';
 import 'home_header.dart';
 import 'home_body.dart';
@@ -16,6 +17,20 @@ class HomePage extends StatelessWidget {
     final provider = context.watch<HomeProvider>();
 
     return Scaffold(
+      drawer: Theme(
+        // ثيم خاص بالـ Drawer فقط
+        data: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: const Color(0xFF282828), // خلفية ثابتة
+          dividerColor: Colors.grey[700],
+          iconTheme: const IconThemeData(color: Colors.white),
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(color: Colors.white),
+          ),
+        ),
+        child: Drawer(
+          child: SidebarPage(userId: 1), // محتوى السايد مينو
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -26,11 +41,14 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomAppBar(),
+                      const CustomAppBar(), // ✅ صار يفتح الـ Drawer
                       SizedBox(height: 16.h),
                       HomeHeader(
                         onCategorySelected: provider.setCategory,
-                        selectedCategory: provider.selectedCategories?.first,
+                        selectedCategory:
+                            provider.selectedCategories?.isNotEmpty == true
+                            ? provider.selectedCategories!.first
+                            : null,
                         onFilterPressed: () async {
                           await Navigator.push(
                             context,

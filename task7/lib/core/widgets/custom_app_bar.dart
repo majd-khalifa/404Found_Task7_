@@ -7,18 +7,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Color? titleColor;
   final Color? backgroundColor;
+  final Color? backBackgroundColor;
   final VoidCallback? onBack;
   final Widget? rightIcon;
   final bool showBack;
+  final String? backIconPath; // ✅ خيار جديد لتغيير أيقونة الرجوع
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.titleColor,
     this.backgroundColor,
+    this.backBackgroundColor,
     this.onBack,
     this.rightIcon,
     this.showBack = true,
+    this.backIconPath, // ✅
   });
 
   @override
@@ -34,10 +38,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               showBack
                   ? GestureDetector(
                       onTap: onBack ?? () => Navigator.pop(context),
-                      child: SvgPicture.asset(
-                        'assets/icons/back.svg',
+                      child: Container(
                         width: 44.w,
                         height: 44.w,
+                        decoration: BoxDecoration(
+                          color: backBackgroundColor ?? Colors.transparent,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: backIconPath != null
+                              ? SvgPicture.asset(
+                                  backIconPath!,
+                                  width: 44.w,
+                                  height: 44.w,
+                                )
+                              : SvgPicture.asset(
+                                  'assets/icons/back.svg', // الافتراضية
+                                  width: 44.w,
+                                  height: 44.w,
+                                ),
+                        ),
                       ),
                     )
                   : const SizedBox(width: 44, height: 44),
@@ -45,7 +65,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Text(
                 title,
                 style: AppTextStyles.ralewaySemiBold(
-                  fontSize: 16.sp,
+                  fontSize: 20.sp,
                   color: titleColor ?? const Color(0xFF2B2B2B),
                 ),
                 overflow: TextOverflow.ellipsis,

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -88,7 +90,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return SafeArea(
-      
+
 //       child: Padding(
 //         padding: EdgeInsets.symmetric(horizontal: 20.w),
 //         child: Row(

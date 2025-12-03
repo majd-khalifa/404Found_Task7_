@@ -10,15 +10,19 @@ class Sectionheader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 61.w,
-      height: 22.h,
-      child: Text(
-        title,
-        style: AppTextStyles.ralewaySemiBold(
-          color: myblack,
-          fontSize: 18.sp,
-          height: (22.h / 18.sp),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 4.h),
+      child: Align(
+        alignment: Alignment.centerLeft, // ✅ يخلي النص على اليسار
+        child: Text(
+          title,
+          style: AppTextStyles.ralewaySemiBold(
+            color: myblack,
+            fontSize: 18.sp,
+            height: 1.2,
+          ),
+          overflow: TextOverflow.visible,
+          softWrap: true,
         ),
       ),
     );

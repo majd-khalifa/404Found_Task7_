@@ -1,4 +1,6 @@
 //search bar that exsist in home page and search page
+// ignore_for_file: avoid_unnecessary_containers, avoid_print
+
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -41,21 +43,18 @@ class _SearchScreenState extends State<SearchScreen> {
                     icon: const Icon(Icons.arrow_back_ios, size: 18),
                     onPressed: () => Navigator.pop(context),
                   ),
-                   SizedBox(width: 5),
-                Text(
-                "Search",
-                style: TextStyle(color: Colors.black, fontSize: 16),
-              ),
+                  SizedBox(width: 5),
+                  Text(
+                    "Search",
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
                 ],
               ),
-             
-
             ),
 
-           
             const SizedBox(width: 30),
             ////
-              TextButton(
+            TextButton(
               onPressed: () {
                 controller.clear();
               },
@@ -66,10 +65,8 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
 
             // 🔍 SEARCH BOX
-           
 
             // CANCEL BUTTON
-          
           ],
         ),
       ),
@@ -79,48 +76,45 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           // const SizedBox(height: 10),
+            // const SizedBox(height: 10),
             // Expanded(
-            //  child: 
-              Container(
-                height: 52,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  color: const Color(0xffF3F3F3),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.search, color: Colors.grey),
+            //  child:
+            Container(
+              height: 52,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: const Color(0xffF3F3F3),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.search, color: Colors.grey),
 
-                    const SizedBox(width: 8),
+                  const SizedBox(width: 8),
 
-                    Expanded(
-                      child: TextField(
-                        controller: controller,
-                        decoration: const InputDecoration(
-                          hintText: "Search Your Shirt",
-                          border: InputBorder.none,
-                        ),
+                  Expanded(
+                    child: TextField(
+                      controller: controller,
+                      decoration: const InputDecoration(
+                        hintText: "Search Your Shirt",
+                        border: InputBorder.none,
                       ),
                     ),
+                  ),
 
-                    // 🎤 MIC BUTTON
-                    IconButton(
-                      icon: const Icon(Icons.mic_none, color: Colors.black),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
+                  // 🎤 MIC BUTTON
+                  IconButton(
+                    icon: const Icon(Icons.mic_none, color: Colors.black),
+                    onPressed: () {},
+                  ),
+                ],
               ),
-           // ),
+            ),
+            // ),
             // TITLE
             const Text(
               "Shirt",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 15),

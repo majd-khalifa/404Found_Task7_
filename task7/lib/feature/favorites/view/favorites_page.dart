@@ -14,16 +14,18 @@ class FavoritesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundcolour,
       bottomNavigationBar: const CustomBottomNavBar(),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-          children: [
-            CustomAppBar(
-              title: "Favourite",
-              rightIcon: SvgPicture.asset('assets/icons/favotire.svg'),
-            ),
+      body: Column(
+        children: [
+          // ✅ نخلي الـ AppBar خارج الـ Padding
+          CustomAppBar(
+            title: "Favourite",
+            rightIcon: SvgPicture.asset('assets/icons/favotire.svg'),
+          ),
 
-            Expanded(
+          // ✅ باقي العناصر داخل الـ Padding
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: GridView(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -36,31 +38,31 @@ class FavoritesPage extends StatelessWidget {
                     image: 'assets/images/shirtf.png',
                     price: '58.7',
                     firstcolor: myred,
-                    secondcolor: Color(0xff0B2F8B),
+                    secondcolor: const Color(0xff0B2F8B),
                   ),
                   Favoritescard(
                     image: 'assets/images/P_shirt.png',
                     price: '37.8',
-                    firstcolor: Color(0xff1F3267),
+                    firstcolor: const Color(0xff1F3267),
                     secondcolor: myred,
                   ),
                   Favoritescard(
                     image: 'assets/images/prigramming_shirt.png',
                     price: '47.7',
-                    firstcolor: Color(0xff2256B9),
-                    secondcolor: Color(0xffA9CFEB),
+                    firstcolor: const Color(0xff2256B9),
+                    secondcolor: const Color(0xffA9CFEB),
                   ),
                   Favoritescard(
                     image: 'assets/images/programmershirt.png',
                     price: '57.6',
-                    firstcolor: Color(0xff7DDBDA),
-                    secondcolor: Color(0xff606ACB),
+                    firstcolor: const Color(0xff7DDBDA),
+                    secondcolor: const Color(0xff606ACB),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

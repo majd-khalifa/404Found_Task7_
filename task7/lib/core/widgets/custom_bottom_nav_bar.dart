@@ -81,7 +81,9 @@ class CustomBottomNavBar extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const ProfilePage()),
+                      MaterialPageRoute(
+                        builder: (_) => const ProfilePage(userId: 1),
+                      ),
                     );
                   },
                   child: SvgPicture.asset(

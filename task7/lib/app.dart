@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task7/feature/auth/signin/view/signin_page.dart';
 import 'package:task7/feature/splashscreen/splashscreen.dart';
 import 'core/style/apptheme/apptheme.dart';
 import 'feature/home/view/home_page.dart';
@@ -21,9 +22,10 @@ class App extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/favorites': (context) => const FavoritesPage(),
         '/notifications': (context) => const NotificationsPage(),
-        '/profile': (context) => const ProfilePage(),
+        '/profile': (context) => const ProfilePage(userId: 1),
         '/splash_screen': (context) => const Splashscreen(),
         '/cart': (context) => const CartPage(),
+        '/signin': (context) => const SigninPage(),
       },
     );
   }

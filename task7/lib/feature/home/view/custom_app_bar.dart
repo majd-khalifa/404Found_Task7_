@@ -9,15 +9,21 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(horizontal: 6.w),
       child: SizedBox(
         height: 44.h,
         child: Row(
           children: [
-            const AppIcon(
-              asset: 'assets/icons/Hamburger.svg',
-              width: 25.7,
-              height: 18,
+            // ✅ زر الهامبرغر يفتح الـ Drawer مباشرة
+            Builder(
+              builder: (context) => AppIcon(
+                asset: 'assets/icons/Hamburger.svg',
+                width: 25.7,
+                height: 18,
+                onTap: () => Scaffold.of(
+                  context,
+                ).openDrawer(), // ✅ يفتح الـ Drawer مباشرة
+              ),
             ),
 
             const Spacer(flex: 2),

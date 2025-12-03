@@ -1,19 +1,16 @@
-// 
 class User {
-  int id;
-  String username;
-  String email;
-  String password;
-  String avatar;
-  String? firstName;
-  String? lastName;
+  final int id;
+  final String username;
+  final String email;
+  final String image;
+  final String? firstName;
+  final String? lastName;
 
   User({
     required this.id,
     required this.username,
     required this.email,
-    required this.password,
-    required this.avatar,
+    required this.image,
     this.firstName,
     this.lastName,
   });
@@ -23,39 +20,11 @@ class User {
       id: json['id'] ?? 0,
       username: json['username'] ?? '',
       email: json['email'] ?? '',
-      password: '', // لا نعرض كلمة المرور الحقيقية
-      // ✅ صورة افتراضية مضمونة من pravatar.cc
-      avatar: 'https://i.pravatar.cc/150?img=${json['id'] ?? 1}',
-      firstName: json['name']?['firstname'],
-      lastName: json['name']?['lastname'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'username': username,
-      'email': email,
-      'password': password,
-    };
-  }
-
-  User copyWith({
-    int? id,
-    String? username,
-    String? email,
-    String? password,
-    String? avatar,
-    String? firstName,
-    String? lastName,
-  }) {
-    return User(
-      id: id ?? this.id,
-      username: username ?? this.username,
-      email: email ?? this.email,
-      password: password ?? this.password,
-      avatar: avatar ?? this.avatar,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
+      image:
+          json['image'] ??
+          'https://ui-avatars.com/api/?name=${json['username'] ?? 'User'}',
+      firstName: json['firstName'] ?? json['name']?['firstname'],
+      lastName: json['lastName'] ?? json['name']?['lastname'],
     );
   }
 
