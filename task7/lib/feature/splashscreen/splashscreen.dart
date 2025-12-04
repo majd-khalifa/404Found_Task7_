@@ -1,9 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:task7/feature/auth/signin/view/signin_page.dart';
+import 'package:task7/core/style/colors/color.dart';
+
 import 'package:task7/feature/home/view/home_page.dart';
+import 'package:task7/feature/onboarding/view/pages_controller.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -25,7 +26,7 @@ class _SplashscreenState extends State<Splashscreen> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => SigninPage()),
+        MaterialPageRoute(builder: (context) => OnboardingScreen()),
       );
     }
   }
@@ -38,6 +39,24 @@ class _SplashscreenState extends State<Splashscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: CircularProgressIndicator()));
+    return Scaffold(
+      backgroundColor: Color(0xff282828),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(color: mywhite),
+            20.verticalSpace,
+            CircleAvatar(
+              radius: 100,
+              child: ClipRRect(
+                borderRadius: BorderRadiusGeometry.circular(60.r),
+                child: Image.asset("assets/images/our_team.png"),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
