@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:task7/feature/cart/view/cart_page.dart';
 import '../data/details_repository.dart';
 import '../model/details_product_model.dart';
 import '../../../core/widgets/custom_app_bar.dart';
@@ -41,7 +43,16 @@ class DetailsPage extends StatelessWidget {
 
               return Column(
                 children: [
-                  const CustomAppBar(title: "T-shirt Shop"),
+                  CustomAppBar(
+                    title: "T-shirt Shop",
+                    rightIcon: SvgPicture.asset('assets/icons/bag.svg'),
+                    onRightTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const CartPage()),
+                      );
+                    },
+                  ),
                   SizedBox(height: 16.h),
                   Expanded(
                     child: DetailsBody(

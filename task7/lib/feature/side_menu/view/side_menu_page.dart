@@ -60,16 +60,19 @@ class _SidebarPageState extends State<SidebarPage> {
         "icon": "assets/icons/profile1.svg",
         "label": "Profile",
         "onTap": () => Navigator.pushNamed(context, '/profile'),
+        "color": Colors.white, // ✅ أيقونة باللون الأبيض
       },
       {
         "icon": "assets/icons/cart_in_profile_page.svg",
         "label": "My Cart",
         "onTap": () => Navigator.pushNamed(context, '/cart'),
+        "color": Colors.white, // ✅ أيقونة باللون الأبيض
       },
       {
         "icon": "assets/icons/heart.svg",
         "label": "Favorite",
         "onTap": () => Navigator.pushNamed(context, '/favorites'),
+        "color": Colors.white, // ✅ أيقونة باللون الأبيض
       },
       {
         "icon": "assets/icons/orders.svg",
@@ -129,6 +132,7 @@ class _SidebarPageState extends State<SidebarPage> {
                                 item["icon"] as String,
                                 item["label"] as String,
                                 item["onTap"] as VoidCallback,
+                                color: item["color"] as Color? ?? Colors.white,
                               ),
                             )
                             .toList(),
@@ -202,7 +206,12 @@ class _SidebarPageState extends State<SidebarPage> {
         padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 12.w),
         child: Row(
           children: [
-            AppIcon(asset: svgPath, width: 22, height: 22),
+            AppIcon(
+              asset: svgPath,
+              width: 22,
+              height: 22,
+              color: color,
+            ), // ✅ اللون الأبيض للأيقونات
             SizedBox(width: 16.w),
             Expanded(
               child: Text(

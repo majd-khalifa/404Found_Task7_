@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task7/feature/home/view/home_page.dart';
 import '../../../core/style/textstyle.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -12,7 +13,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? rightIcon;
   final bool showBack;
   final String? backIconPath;
-  final String? rightText; // ✅ نص بديل للأيقونة
+  final String? rightText;
+  final VoidCallback? onRightTap;
 
   const CustomAppBar({
     super.key,
@@ -24,7 +26,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.rightIcon,
     this.showBack = true,
     this.backIconPath,
-    this.rightText, // ✅
+    this.rightText,
+    this.onRightTap,
   });
 
   @override
@@ -39,7 +42,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               showBack
                   ? GestureDetector(
-                      onTap: onBack ?? () => Navigator.pop(context),
+                      onTap:
+                          onBack ??
+                          () => Navigator.pop(context), // ✅ ضغطة عادية
+                      onLongPress: () {
+                        // ✅ ضغطة مطوّلة → الهوم
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (_) => const HomePage()),
+                          (route) => false,
+                        );
+                      },
                       child: Container(
                         width: 44.w,
                         height: 44.w,
@@ -67,10 +80,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 overflow: TextOverflow.ellipsis,
               ),
 
-              // ✅ إذا فيه نص، نعرضه بدل الأيقونة
               rightText != null
                   ? GestureDetector(
-                      onTap: () {}, // مجرد clickable بدون حدث
+                      onTap: onRightTap,
                       child: Text(
                         rightText!,
                         style: AppTextStyles.ralewaySemiBold(
@@ -79,7 +91,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ),
                     )
-                  : (rightIcon ?? const SizedBox(width: 44, height: 44)),
+                  : GestureDetector(
+                      onTap: onRightTap,
+                      child: rightIcon ?? const SizedBox(width: 44, height: 44),
+                    ),
             ],
           ),
         ),

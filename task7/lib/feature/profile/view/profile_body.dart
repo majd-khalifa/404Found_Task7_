@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:task7/core/errors/error_message.dart';
 import 'package:task7/core/network/api_constants.dart';
 import 'package:task7/core/style/textstyle.dart';
-import 'package:task7/core/widgets/my_bottom.dart';
+import 'package:task7/core/widgets/my_button.dart';
 import 'package:task7/feature/profile/model/user_model.dart';
 
 class ProfileBody extends StatefulWidget {
@@ -121,7 +121,7 @@ class _ProfileViewPageState extends State<ProfileBody> {
           ),
           SizedBox(height: 20.h),
 
-          Mybottom(
+          MyButton(
             color: Colors.green,
             widget: Text(
               "Save Now",

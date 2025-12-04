@@ -23,10 +23,9 @@ class DetailsBody extends StatelessWidget {
         children: [
           SizedBox(height: 20.h),
 
-          // ✅ عنوان المنتج
           Text(
             product.title,
-            style: AppTextStyles.ralewaySemiBold(
+            style: AppTextStyles.ralewayBold(
               fontSize: 18.sp,
               color: const Color(0xFF2B2B2B),
             ),
@@ -37,7 +36,7 @@ class DetailsBody extends StatelessWidget {
           // ✅ الفئة
           Text(
             product.category,
-            style: AppTextStyles.ralewayRegular(
+            style: AppTextStyles.ralewayMedium(
               fontSize: 14.sp,
               color: const Color(0xFF707B81),
             ),
@@ -56,21 +55,26 @@ class DetailsBody extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 16.h),
-
-          // ✅ صورة المنتج الأساسي
           Center(
             child: Image.network(
               product.image,
-              width: 240.w,
+              width: 217.w,
               height: 220.h,
               fit: BoxFit.contain,
             ),
           ),
 
-          SizedBox(height: 24.h),
+          Center(
+            child: Image.asset(
+              'assets/icons/Slider.png',
+              width: 352.w,
+              height: 77.h,
+              fit: BoxFit.contain,
+            ),
+          ),
 
-          // ✅ باقي المنتجات من نفس الكاتيجوري
+          SizedBox(height: 22.h),
+
           SizedBox(
             height: 72.h,
             child: ListView.separated(
@@ -93,16 +97,15 @@ class DetailsBody extends StatelessWidget {
                     width: 56.w,
                     height: 56.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: Colors.white),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.r),
+                    child: Center(
                       child: Image.network(
                         item.image,
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.fill,
+                        width: 40.w,
+                        height: 40.h,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
@@ -113,11 +116,11 @@ class DetailsBody extends StatelessWidget {
 
           SizedBox(height: 24.h),
 
-          // ✅ الوصف
           Text(
             product.description,
             style: AppTextStyles.poppinsRegular(
               fontSize: 14.sp,
+              height: 20 / 11,
               color: const Color(0xFF707B81),
             ),
             maxLines: 4,
@@ -132,6 +135,7 @@ class DetailsBody extends StatelessWidget {
               "Read More",
               style: AppTextStyles.poppinsRegular(
                 fontSize: 14.sp,
+                height: 21 / 14,
                 color: const Color(0xFF34C759),
               ),
             ),

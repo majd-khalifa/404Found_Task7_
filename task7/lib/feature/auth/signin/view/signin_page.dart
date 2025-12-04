@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task7/core/style/colors/color.dart';
 import 'package:task7/core/style/textstyle.dart';
-import 'package:task7/core/widgets/my_bottom.dart';
+import 'package:task7/core/widgets/my_button.dart';
 import 'package:task7/core/widgets/mytextformfield.dart';
 import 'package:task7/feature/auth/signin/data/signin_service.dart';
 import 'package:task7/feature/auth/signin/model/login_request.dart';
@@ -206,7 +206,7 @@ class _SigninPageState extends State<SigninPage> {
                       ),
                     ),
                     24.verticalSpace,
-                    Mybottom(
+                    MyButton(
                       color: mygreen,
                       widget: isloading
                           ? Center(child: CircularProgressIndicator())
@@ -221,7 +221,7 @@ class _SigninPageState extends State<SigninPage> {
                       onPressed: isloading ? null : login,
                     ),
                     24.verticalSpace,
-                    Mybottom(
+                    MyButton(
                       color: backgroundcolour,
                       widget: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

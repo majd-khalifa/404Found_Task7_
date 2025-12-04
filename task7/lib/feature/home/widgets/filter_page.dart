@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task7/core/style/textstyle.dart';
+import '../../../core/widgets/custom_app_bar.dart';
+import '../../../core/widgets/my_button.dart';
 
 class FilterPage extends StatefulWidget {
   final List<String> categories;
@@ -24,19 +27,16 @@ class _FilterPageState extends State<FilterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Filter"),
-        centerTitle: true,
-        backgroundColor: Colors.green,
-      ),
+      appBar: CustomAppBar(title: "Filter", showBack: true),
       body: Padding(
         padding: EdgeInsets.all(20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 20.h),
             Text(
               "Select Categories",
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+              style: AppTextStyles.ralewaySemiBold(fontSize: 16.sp),
             ),
             SizedBox(height: 12.h),
             Wrap(
@@ -59,10 +59,10 @@ class _FilterPageState extends State<FilterPage> {
                 );
               }).toList(),
             ),
-            SizedBox(height: 24.h),
+            SizedBox(height: 30.h),
             Text(
               "Price Range",
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+              style: AppTextStyles.ralewaySemiBold(fontSize: 16.sp),
             ),
             RangeSlider(
               values: priceRange,
@@ -82,16 +82,13 @@ class _FilterPageState extends State<FilterPage> {
             const Spacer(),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
+              child: MyButton(
+                widget: Text("Apply Filters"),
+                color: Colors.green,
                 onPressed: () {
                   widget.onApply(selectedCategories, priceRange);
                   Navigator.pop(context);
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                ),
-                child: const Text("Apply Filters"),
               ),
             ),
           ],

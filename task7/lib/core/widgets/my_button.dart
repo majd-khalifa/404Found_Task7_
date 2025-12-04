@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Mybottom extends StatelessWidget {
+class MyButton extends StatelessWidget {
   final Widget widget;
   final Function()? onPressed;
   final Color color;
-  const Mybottom({
+  const MyButton({
     super.key,
     required this.widget,
     required this.color,

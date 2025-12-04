@@ -9,7 +9,7 @@ import 'package:task7/core/network/api_consumer.dart';
 
 import 'package:task7/core/style/colors/color.dart';
 import 'package:task7/core/style/textstyle.dart';
-import 'package:task7/core/widgets/my_bottom.dart';
+import 'package:task7/core/widgets/my_button.dart';
 import 'package:task7/core/widgets/mytextformfield.dart';
 import 'package:task7/feature/auth/signin/view/signin_page.dart';
 import 'package:task7/feature/auth/signup/model/signup_request.dart';
@@ -216,7 +216,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                   SizedBox(height: 40.h),
-                  Mybottom(
+                  MyButton(
                     color: mygreen,
                     widget: isloading
                         ? Center(child: CircularProgressIndicator())
@@ -231,7 +231,7 @@ class _SignupPageState extends State<SignupPage> {
                     onPressed: isloading ? null : signup,
                   ),
                   SizedBox(height: 24.h),
-                  Mybottom(
+                  MyButton(
                     color: backgroundcolour,
                     widget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
