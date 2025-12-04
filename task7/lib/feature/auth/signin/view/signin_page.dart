@@ -91,8 +91,9 @@ class _SigninPageState extends State<SigninPage> {
                         height: 44.h,
                         color: backgroundcolour,
                         child: IconButton(
+                          color: backgroundcolour,
                           onPressed: () {},
-                          icon: SvgPicture.asset("assets/icons/back.svg"),
+                          icon: SvgPicture.asset("assets/icons/back_icon.svg"),
                         ),
                       ),
                     ),
