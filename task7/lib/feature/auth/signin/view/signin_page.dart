@@ -151,10 +151,6 @@ class _SigninPageState extends State<SigninPage> {
                                 return 'Please enter your email';
                               }
 
-                              // final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-                              // if (!emailRegex.hasMatch(value)) {
-                              //   return 'Enter a valid email address';
-                              // }
                               return null;
                             },
                             controller: usernamcontroller,
@@ -179,12 +175,7 @@ class _SigninPageState extends State<SigninPage> {
                               if (value.length < 6) {
                                 return 'Password must be at least 6 characters';
                               }
-                              // if (!RegExp(r'[A-Z]').hasMatch(value)) {
-                              //   return 'Password must contain at least one uppercase letter';
-                              // }
-                              // if (!RegExp(r'[0-9]').hasMatch(value)) {
-                              //   return 'Password must contain at least one number';
-                              // }
+
                               return null;
                             },
                             hinttext: "••••••••",

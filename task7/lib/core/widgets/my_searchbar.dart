@@ -35,7 +35,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
         title: Row(
           children: [
-            // ← BACK BUTTON
             Container(
               child: Row(
                 children: [
@@ -53,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
 
             const SizedBox(width: 30),
-            ////
+
             TextButton(
               onPressed: () {
                 controller.clear();
@@ -63,10 +62,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 style: TextStyle(color: Colors.green, fontSize: 16),
               ),
             ),
-
-            // 🔍 SEARCH BOX
-
-            // CANCEL BUTTON
           ],
         ),
       ),
@@ -76,9 +71,6 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // const SizedBox(height: 10),
-            // Expanded(
-            //  child:
             Container(
               height: 52,
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -102,7 +94,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
 
-                  // 🎤 MIC BUTTON
                   IconButton(
                     icon: const Icon(Icons.mic_none, color: Colors.black),
                     onPressed: () {},
@@ -110,8 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ],
               ),
             ),
-            // ),
-            // TITLE
+
             const Text(
               "Shirt",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -119,7 +109,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
             const SizedBox(height: 15),
 
-            // RESULTS LIST
             Expanded(
               child: ListView.builder(
                 itemCount: history.length,

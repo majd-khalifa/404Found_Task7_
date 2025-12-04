@@ -9,7 +9,7 @@ class AppIcon extends StatelessWidget {
   final double? width;
   final double? height;
   final VoidCallback? onTap;
-  final Color? color; // ✅ إضافة اللون
+  final Color? color;
 
   const AppIcon({
     super.key,
@@ -17,7 +17,7 @@ class AppIcon extends StatelessWidget {
     this.width,
     this.height,
     this.onTap,
-    this.color, // ✅ باراميتر اللون
+    this.color,
   });
 
   @override
@@ -26,7 +26,7 @@ class AppIcon extends StatelessWidget {
       asset,
       width: width?.w,
       height: height?.h,
-      color: color, // ✅ تطبيق اللون
+      color: color,
     );
 
     return onTap != null ? GestureDetector(onTap: onTap, child: icon) : icon;

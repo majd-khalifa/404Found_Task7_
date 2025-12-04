@@ -21,7 +21,7 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder<List<DetailsProductModel>>(
-          future: repo.getAllProducts(), // ✅ جلب كل المنتجات
+          future: repo.getAllProducts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return SizedBox(
@@ -57,7 +57,7 @@ class DetailsPage extends StatelessWidget {
                   Expanded(
                     child: DetailsBody(
                       product: product,
-                      relatedProducts: related, // ✅ تمرير المنتجات المشابهة
+                      relatedProducts: related,
                     ),
                   ),
                   SizedBox(height: 12.h),

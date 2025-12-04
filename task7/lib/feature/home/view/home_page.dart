@@ -18,18 +18,15 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       drawer: Theme(
-        // ثيم خاص بالـ Drawer فقط
         data: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: const Color(0xFF282828), // خلفية ثابتة
+          scaffoldBackgroundColor: const Color(0xFF282828),
           dividerColor: Colors.grey[700],
           iconTheme: const IconThemeData(color: Colors.white),
           textTheme: const TextTheme(
             bodyMedium: TextStyle(color: Colors.white),
           ),
         ),
-        child: Drawer(
-          child: SidebarPage(userId: 1), // محتوى السايد مينو
-        ),
+        child: Drawer(child: SidebarPage(userId: 1)),
       ),
       body: SafeArea(
         child: Padding(
@@ -41,7 +38,7 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomAppBar(), // ✅ صار يفتح الـ Drawer
+                      const CustomAppBar(),
                       SizedBox(height: 16.h),
                       HomeHeader(
                         onCategorySelected: provider.setCategory,
@@ -77,7 +74,7 @@ class HomePage extends StatelessWidget {
                 ),
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavBar(),
+      bottomNavigationBar: const CustomBottomNavBar(activePage: 0),
     );
   }
 }

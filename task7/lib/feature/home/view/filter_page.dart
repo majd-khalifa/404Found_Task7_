@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,8 +18,8 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  List<String> selectedCategories = []; // ✅ أكثر من كاتيجوري
-  RangeValues priceRange = const RangeValues(0, 1000); // ✅ لحد 1000
+  List<String> selectedCategories = [];
+  RangeValues priceRange = const RangeValues(0, 1000);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,7 @@ class _FilterPageState extends State<FilterPage> {
             RangeSlider(
               values: priceRange,
               min: 0,
-              max: 1000, // ✅ لحد 1000
+              max: 1000,
               divisions: 100,
               labels: RangeLabels(
                 "\$${priceRange.start.round()}",

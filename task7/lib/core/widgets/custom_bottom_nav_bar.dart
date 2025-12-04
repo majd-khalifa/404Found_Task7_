@@ -10,7 +10,10 @@ import '../../feature/profile/view/profile_page.dart';
 import '../../feature/cart/view/cart_page.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
-  const CustomBottomNavBar({super.key});
+  final int
+  activePage; // 0 = Home, 1 = Favorites, 2 = Notifications, 3 = Profile
+
+  const CustomBottomNavBar({super.key, required this.activePage});
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +46,12 @@ class CustomBottomNavBar extends StatelessWidget {
                     'assets/icons/home.svg',
                     width: 22.w,
                     height: 24.h,
-                    color: const Color(0xFF34C759),
+                    color: activePage == 0
+                        ? const Color(0xFF34C759)
+                        : Colors.grey,
                   ),
                 ),
+
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -57,10 +63,14 @@ class CustomBottomNavBar extends StatelessWidget {
                     'assets/icons/heart.svg',
                     width: 24.w,
                     height: 24.h,
-                    color: Colors.grey,
+                    color: activePage == 1
+                        ? const Color(0xFF34C759)
+                        : Colors.grey,
                   ),
                 ),
+
                 SizedBox(width: 88.w),
+
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -74,9 +84,12 @@ class CustomBottomNavBar extends StatelessWidget {
                     'assets/icons/notification.svg',
                     width: 24.w,
                     height: 24.h,
-                    color: Colors.grey,
+                    color: activePage == 2
+                        ? const Color(0xFF34C759)
+                        : Colors.grey,
                   ),
                 ),
+
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -90,7 +103,9 @@ class CustomBottomNavBar extends StatelessWidget {
                     'assets/icons/profile.svg',
                     width: 24.w,
                     height: 24.h,
-                    color: Colors.grey,
+                    color: activePage == 3
+                        ? const Color(0xFF34C759)
+                        : Colors.grey,
                   ),
                 ),
               ],

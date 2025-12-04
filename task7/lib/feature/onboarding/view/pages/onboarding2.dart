@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,7 +26,7 @@ class Onboarding2 extends StatelessWidget {
                   maxLines: 1,
                   "Let’s Start Journey",
                   textAlign: TextAlign.center,
-                  style: AppTextStyles.ralewayBold(
+                  style: AppTextStyles.ralewaySemiBold(
                     color: Color(0xffECECEC),
                     fontSize: 34.sp,
                     height: (44.2.h / 34.sp),

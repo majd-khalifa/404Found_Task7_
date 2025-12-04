@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,7 +15,7 @@ class Onboarding3 extends StatelessWidget {
       width: 1.sw,
       height: 1.sh,
       color: Color(0xff282828),
-    
+
       child: Stack(
         children: [
           Padding(
@@ -27,7 +29,7 @@ class Onboarding3 extends StatelessWidget {
                     maxLines: 2,
                     "You Have the \nPower To",
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.ralewayBold(
+                    style: AppTextStyles.ralewaySemiBold(
                       color: Color(0xffECECEC),
                       fontSize: 34.sp,
                       height: (44.2.h / 34.sp),
@@ -36,7 +38,7 @@ class Onboarding3 extends StatelessWidget {
                   30.verticalSpace,
                   Text(
                     maxLines: 2,
-    
+
                     "There Are Many Beautiful And Attractive\n Plants To Your Room",
                     textAlign: TextAlign.center,
                     style: AppTextStyles.poppinsRegular(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task7/core/style/textstyle.dart';
 
-/// Widget عام لعرض رسالة خطأ مخصصة
 class ErrorMessage extends StatelessWidget {
   final String message;
 
@@ -20,7 +19,6 @@ class ErrorMessage extends StatelessWidget {
   }
 }
 
-/// Class فيه رسائل خطأ جاهزة للاستدعاء
 class ErrorMessages {
   static ErrorMessage noData() {
     return const ErrorMessage(message: "No data available");

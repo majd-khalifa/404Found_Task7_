@@ -13,16 +13,14 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundcolour,
-      bottomNavigationBar: const CustomBottomNavBar(),
+      bottomNavigationBar: const CustomBottomNavBar(activePage: 1),
       body: Column(
         children: [
-          // ✅ نخلي الـ AppBar خارج الـ Padding
           CustomAppBar(
             title: "Favourite",
             rightIcon: SvgPicture.asset('assets/icons/favotire.svg'),
           ),
 
-          // ✅ باقي العناصر داخل الـ Padding
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),

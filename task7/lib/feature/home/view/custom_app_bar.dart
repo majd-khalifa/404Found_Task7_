@@ -14,15 +14,12 @@ class CustomAppBar extends StatelessWidget {
         height: 44.h,
         child: Row(
           children: [
-            // ✅ زر الهامبرغر يفتح الـ Drawer مباشرة
             Builder(
               builder: (context) => AppIcon(
                 asset: 'assets/icons/Hamburger.svg',
                 width: 25.7,
                 height: 18,
-                onTap: () => Scaffold.of(
-                  context,
-                ).openDrawer(), // ✅ يفتح الـ Drawer مباشرة
+                onTap: () => Scaffold.of(context).openDrawer(),
               ),
             ),
 

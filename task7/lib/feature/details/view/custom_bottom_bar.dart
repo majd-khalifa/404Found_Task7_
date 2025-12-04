@@ -22,7 +22,6 @@ class CustomBottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // ✅ زر المفضلة
           GestureDetector(
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -38,7 +37,6 @@ class CustomBottomBar extends StatelessWidget {
 
           SizedBox(width: 32.w),
 
-          // ✅ زر Add to Cart مطابق للصورة
           Expanded(
             child: GestureDetector(
               onTap: () {

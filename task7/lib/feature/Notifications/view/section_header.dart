@@ -13,7 +13,7 @@ class Sectionheader extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.h),
       child: Align(
-        alignment: Alignment.centerLeft, // ✅ يخلي النص على اليسار
+        alignment: Alignment.centerLeft,
         child: Text(
           title,
           style: AppTextStyles.ralewaySemiBold(

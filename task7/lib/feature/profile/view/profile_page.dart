@@ -27,7 +27,6 @@ class ProfilePage extends StatelessWidget {
             children: [
               SizedBox(height: 20.h),
 
-              // ✅ استدعاء ProfileBody مع userId
               SizedBox(
                 height: 600.h,
                 child: ProfileBody(userId: userId),

@@ -19,7 +19,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // ✅ زر الرجوع مع خلفية رمادية فاتحة
             GestureDetector(
               onTap: () {
                 Navigator.pushReplacement(
@@ -29,7 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF7F7F9), // خلفية رمادية فاتحة
+                  color: const Color(0xFFF7F7F9),
                   shape: BoxShape.circle,
                 ),
                 padding: EdgeInsets.all(6.w),
@@ -42,7 +41,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
 
-            // ✅ العنوان
             Text(
               "Search",
               style: AppTextStyles.ralewaySemiBold(
@@ -52,7 +50,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               overflow: TextOverflow.ellipsis,
             ),
 
-            // ✅ زر الإلغاء
             TextButton(
               onPressed: () {
                 controller.clear();

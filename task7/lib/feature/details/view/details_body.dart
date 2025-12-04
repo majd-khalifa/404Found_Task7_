@@ -33,7 +33,6 @@ class DetailsBody extends StatelessWidget {
 
           SizedBox(height: 8.h),
 
-          // ✅ الفئة
           Text(
             product.category,
             style: AppTextStyles.ralewayMedium(
@@ -46,7 +45,6 @@ class DetailsBody extends StatelessWidget {
 
           SizedBox(height: 12.h),
 
-          // ✅ السعر
           Text(
             "\$${product.price.toStringAsFixed(2)}",
             style: AppTextStyles.poppinsSemiBold(
@@ -85,7 +83,6 @@ class DetailsBody extends StatelessWidget {
                 final item = relatedProducts[index];
                 return GestureDetector(
                   onTap: () {
-                    // ✅ الانتقال لصفحة تفاصيل جديدة
                     Navigator.push(
                       context,
                       MaterialPageRoute(

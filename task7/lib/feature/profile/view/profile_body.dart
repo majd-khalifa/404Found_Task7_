@@ -7,7 +7,7 @@ import 'package:task7/core/errors/error_message.dart';
 import 'package:task7/core/network/api_constants.dart';
 import 'package:task7/core/style/textstyle.dart';
 import 'package:task7/core/widgets/my_button.dart';
-import 'package:task7/feature/profile/model/user_model.dart';
+import 'package:task7/feature/profile/model/profile_product_model.dart';
 
 class ProfileBody extends StatefulWidget {
   final int userId;

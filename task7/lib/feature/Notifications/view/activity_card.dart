@@ -73,20 +73,6 @@ class Activitycard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Align(
-                  //   alignment: Alignment.topRight,
-                  //   child: Text(
-                  //     time,
-                  //     softWrap: true,
-                  //     maxLines: null,
-                  //     overflow: TextOverflow.visible,
-                  //     style: AppTextStyles.poppinsMedium(
-                  //       color: recoverypasscolor,
-                  //       fontSize: 14.sp,
-                  //       height: (20 / 14).h,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

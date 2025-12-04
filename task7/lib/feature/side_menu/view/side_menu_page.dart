@@ -54,41 +54,32 @@ class _SidebarPageState extends State<SidebarPage> {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ قائمة العناصر
     final menuItems = [
       {
         "icon": "assets/icons/profile1.svg",
         "label": "Profile",
         "onTap": () => Navigator.pushNamed(context, '/profile'),
-        "color": Colors.white, // ✅ أيقونة باللون الأبيض
+        "color": Colors.white,
       },
       {
         "icon": "assets/icons/cart_in_profile_page.svg",
         "label": "My Cart",
         "onTap": () => Navigator.pushNamed(context, '/cart'),
-        "color": Colors.white, // ✅ أيقونة باللون الأبيض
+        "color": Colors.white,
       },
       {
         "icon": "assets/icons/heart.svg",
         "label": "Favorite",
         "onTap": () => Navigator.pushNamed(context, '/favorites'),
-        "color": Colors.white, // ✅ أيقونة باللون الأبيض
+        "color": Colors.white,
       },
-      {
-        "icon": "assets/icons/orders.svg",
-        "label": "Orders",
-        "onTap": () {}, // dummy
-      },
+      {"icon": "assets/icons/orders.svg", "label": "Orders", "onTap": () {}},
       {
         "icon": "assets/icons/notification1.svg",
         "label": "Notifications",
         "onTap": () => Navigator.pushNamed(context, '/notifications'),
       },
-      {
-        "icon": "assets/icons/setting.svg",
-        "label": "Settings",
-        "onTap": () {}, // dummy
-      },
+      {"icon": "assets/icons/setting.svg", "label": "Settings", "onTap": () {}},
     ];
 
     return SafeArea(
@@ -122,7 +113,6 @@ class _SidebarPageState extends State<SidebarPage> {
                   ),
                   SizedBox(height: 30.h),
 
-                  // ✅ القائمة الجانبية باستخدام القائمة
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
@@ -143,7 +133,6 @@ class _SidebarPageState extends State<SidebarPage> {
                   Divider(color: Colors.grey[700], thickness: 1),
                   SizedBox(height: 10.h),
 
-                  // ✅ تسجيل الخروج
                   _buildMenuItem(
                     "assets/icons/logout.svg",
                     "Sign Out",
@@ -206,12 +195,7 @@ class _SidebarPageState extends State<SidebarPage> {
         padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 12.w),
         child: Row(
           children: [
-            AppIcon(
-              asset: svgPath,
-              width: 22,
-              height: 22,
-              color: color,
-            ), // ✅ اللون الأبيض للأيقونات
+            AppIcon(asset: svgPath, width: 22, height: 22, color: color),
             SizedBox(width: 16.w),
             Expanded(
               child: Text(

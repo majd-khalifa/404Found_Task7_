@@ -6,7 +6,7 @@ class AppDecorations {
     return BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(radius),
-      boxShadow: AppShadows.light, // ✅ استدعاء الشادو من الملف
+      boxShadow: AppShadows.light,
     );
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../home/view/home_page.dart';
-import '../../../core/style/textstyle.dart'; // ✅ استدعاء AppTextStyles
+import '../../../core/style/textstyle.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w), // ✅ responsive
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Text(
               "T-shirt Shop",
               style: AppTextStyles.ralewaySemiBold(
-                fontSize: 18.sp, // ✅ responsive font
+                fontSize: 18.sp,
                 color: const Color(0xFF2B2B2B),
               ),
               overflow: TextOverflow.ellipsis,
@@ -46,5 +46,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(56.h); // ✅ responsive height
+  Size get preferredSize => Size.fromHeight(56.h);
 }

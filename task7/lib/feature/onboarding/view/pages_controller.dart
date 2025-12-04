@@ -52,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           Positioned(
             bottom: 241.h,
-            right: 163.w,
+            right: 130.w,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(pages.length, (index) {
@@ -87,18 +87,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               onPressed: () => nextPage(),
             ),
           ),
-      
-          // Positioned(
-          //   bottom: 36.h,
-          //   left: 20.w,
-          //   child: Mybottom(
-          //     onPressed: () => nextPage(),
-          //     widget: Text(
-          //       currentPage == pages.length - 1 ? "ابدأ" : "التالي",
-          //     ),
-          //     color: mygray,
-          //   ),
-          // ),
         ],
       ),
     );

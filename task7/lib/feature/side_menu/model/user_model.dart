@@ -2,12 +2,9 @@ class User {
   final int id;
   final String username;
   final String email;
-  final String image; // ✅ بدل avatar
+  final String image;
   final String? firstName;
   final String? lastName;
-
-  // كلمة المرور ما بترجع من الـ API، فمو ضروري نخزنها هون
-  // إذا بدك تستخدمها بس للـ request، خليها في موديل الـ LoginRequest
 
   User({
     required this.id,
@@ -25,7 +22,7 @@ class User {
       email: json['email'] ?? '',
       image:
           json['image'] ??
-          'https://ui-avatars.com/api/?name=${json['username'] ?? 'User'}', // ✅ fallback إذا ما رجع صورة
+          'https://ui-avatars.com/api/?name=${json['username'] ?? 'User'}',
       firstName: json['firstName'] ?? json['name']?['firstname'],
       lastName: json['lastName'] ?? json['name']?['lastname'],
     );

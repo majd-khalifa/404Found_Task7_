@@ -42,11 +42,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               showBack
                   ? GestureDetector(
-                      onTap:
-                          onBack ??
-                          () => Navigator.pop(context), // ✅ ضغطة عادية
+                      onTap: onBack ?? () => Navigator.pop(context),
                       onLongPress: () {
-                        // ✅ ضغطة مطوّلة → الهوم
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (_) => const HomePage()),

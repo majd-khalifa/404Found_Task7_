@@ -42,8 +42,6 @@ class _SignupPageState extends State<SignupPage> {
         password: passwordcontroller.text,
       );
 
-      // final data = await api.post('/auth/signup', body: req.toJson());
-
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Account created ')));
@@ -146,7 +144,6 @@ class _SignupPageState extends State<SignupPage> {
                             if (value.length > 20) {
                               return 'Username must not exceed 20 characters';
                             }
-                            // Regex: يسمح بالأحرف والأرقام والـ underscore فقط
                             final usernameRegex = RegExp(r'^[a-zA-Z0-9_]+$');
                             if (!usernameRegex.hasMatch(value)) {
                               return 'Username can only contain letters, numbers, and underscores';

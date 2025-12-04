@@ -23,7 +23,6 @@ class SearchHeader extends StatelessWidget {
               child: Container(
                 height: 52.0.h,
                 padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                // ✅ استدعاء الـ whiteBox من AppDecorations
                 decoration: AppDecorations.whiteBox(radius: 14),
                 child: Row(
                   children: [
