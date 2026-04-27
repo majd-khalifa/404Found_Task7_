@@ -7,6 +7,7 @@ This is a Flutter mobile application developed as part of a team project.
 ## 👩‍💻 My Contribution
 - Developed **Profile Screen**
 - Developed **Search Screen**
+- Developed **Side Menu**
 - Built reusable UI components
 - Worked with team using Git & GitHub
 
