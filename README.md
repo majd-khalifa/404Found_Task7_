@@ -1,34 +1,59 @@
 # 📱 Flutter Team Project
 
-A collaborative Flutter mobile application built as part of a team project, focusing on clean UI, reusable components, and teamwork using Git & GitHub.
-
----
-
-## 👩‍💻 My Contribution
-
-I was responsible for developing and enhancing several key parts of the application:
-
-- 🏠 Home Screen implementation  
-- 👤 Profile Screen development  
-- 🔍 Search Screen development  
-- 📂 Side Navigation Menu (Drawer)  
-- ♻️ Building reusable UI components  
-- 🤝 Collaborating with the team using Git & GitHub workflows (branching, pull requests, merging)
+A professional collaborative Flutter application developed as part of a team project.  
+The project focuses on clean architecture, reusable components, and delivering a smooth user experience.
 
 ---
 
 ## 🛠 Tech Stack
 
-- Flutter  
-- Dart  
-- Material Design UI  
-- Git & GitHub (version control)
+![Flutter](https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?logo=dart&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+
+- Flutter (UI Framework)
+- Dart (Programming Language)
+- Material Design
+- Git & GitHub (Version Control)
+
+---
+
+## 👩‍💻 My Contribution
+
+As part of the development team, I contributed to:
+
+- 🏠 Home Screen implementation  
+- 👤 Profile Screen development  
+- 🔍 Search Screen development  
+- 📂 Side Navigation Menu (Drawer)  
+- ♻️ Reusable UI components  
+- 🤝 Team collaboration using Git & GitHub (branching, pull requests, code reviews)
+
+---
+
+## 🧠 Architecture
+
+The project is structured with scalability and maintainability in mind:
+
+- Presentation Layer (UI Screens)
+- Reusable Widgets
+- State Management (Cubit / setState depending on implementation)
+- Clean separation between UI and logic
+
+---
+
+## 🚀 Features
+
+- Clean and modern UI design
+- Responsive layouts across screens
+- Navigation drawer for smooth navigation
+- Search functionality
+- Reusable components for scalability
+- Organized project structure
 
 ---
 
 ## 📱 Screenshots
-
-Below are some screenshots from the application:
 
 ### 🏠 Home Screen
 ![Home Screen](Home_Screen.jpg)
