@@ -5,6 +5,7 @@ This is a Flutter mobile application developed as part of a team project.
 ---
 
 ## 👩‍💻 My Contribution
+- Developed **Home Screen**
 - Developed **Profile Screen**
 - Developed **Search Screen**
 - Developed **Side Menu**
